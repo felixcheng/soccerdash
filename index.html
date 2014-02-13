@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
+  <header ng-controller="HeaderCtrl">
     <button>Navigation</button>
     <nav>
       <ul>
@@ -47,10 +47,9 @@
         <li><a href='#' data-team="west-ham-united">West Ham United</a></li>
         <li><a href='login.html'>Logout</a></li>
       </ul>
-
-
     </nav>
 
+    <h1>Showing Stats for: {{ team.name }}</h1>
 
   </header>
 
