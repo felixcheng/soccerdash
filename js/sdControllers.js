@@ -3,17 +3,16 @@ var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDash
 soccerDashControllers.controller("LeagueTblCtrl", ["$scope", "$http",
 
 	function($scope, $http){  
-		$http.jsonp("http://api.statsfc.com/table.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&year=2013/2014?callback=JSON_CALLBACK").then( function ( response ) {
+		$http.jsonp("http://api.statsfc.com/table.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&year=2013/2014&callback=JSON_CALLBACK").then( function ( response ) {
 	    $scope.teams = response.data;
 	    console.log($scope)
 		});    
 
-    $scope.isFavorite = function(){
-      if ($scope.teams.team === $scope.favorite){
-        $scope.teams.team.favorite = true; 
-      }
-    };
-
+    $scope.isFavorite= function(){
+    	if ($scope.teams.team === $scope.favorite){
+    		$scope.teams.team.favorite = true; 
+    	}
+    }
 }]);
 
 soccerDashControllers.controller('IndexController',
@@ -50,9 +49,6 @@ soccerDashControllers.controller('IndexController',
     });
 
 }]);
-=======
-	}]);
->>>>>>> Change to 'jsonp'
 
 soccerDashControllers.controller("HomeController", ["$scope", function($scope){
   // Array of team objects 
