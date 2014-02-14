@@ -1,4 +1,17 @@
-<div ng-show="loginObj.user">
-  Welcome {{ loginObj.user.displayName }}
-  <a href="#" ng-click="loginObj.$logout()">Logout</a>
-</div>
+<header ng-controller="HomeController">
+  <button>Navigation</button>
+  <nav>
+    <ul>
+      <li>SoccerDash</li>
+      <li>Welcome {{ loginObj.user.displayName }}!</li>
+      <li ng-repeat="team in teams"><a href='#' data-team="{{ team.shortName }}">{{ team.fullName }}</a></li>
+      <li><a href="#" ng-click="loginObj.$logout()">Logout</a></li>
+    </ul>
+  </nav>
+
+  <h1>Showing Stats for: {{ team.name }}</h1>
+
+  <div id="widget-container">
+  </div>
+
+</header>
