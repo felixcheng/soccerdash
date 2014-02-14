@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html ng-app="soccerDashApp">
 <head>
-  <title>SoccerDash</title>
-  <!-- Angular Resources -->
-  <script src="lib/angular/angular.js"></script>
-  <script src="lib/angular/angular-route.js"></script>
-  <script src="lib/angular/angular-resource.js"></script>
-  <!-- d3 --> 
-  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <!-- jQuery -->
-  <script src="lib/jquery/jquery-1.10.2.js"></script>  
-  
+  <title>SoccerDash</title>  
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <div ng-view>
-
+  <!-- Main container --> 
+  <div ng-controller="IndexController">
+    <div ng-view></div>
   </div>
+
+  <!-- d3 Resourses --> 
+  <script src="lib/d3.v3/d3.v3.min.js" charset="utf-8"></script>
+  <!-- jQuery Resources -->
+  <script src="lib/jquery/jquery-1.10.2.js"></script>  
+  <!-- Angular Resources -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-route.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <!-- Firebase Resources -->
+  <script src='https://cdn.firebase.com/v0/firebase.js'></script>
+  <script src='https://cdn.firebase.com/js/simple-login/1.2.5/firebase-simple-login.js'></script>
+  <script src='https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js'></script>
 
   <!-- Our JS files  -->
   <script src="js/sdApp.js"></script>
