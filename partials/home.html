@@ -1,17 +1,34 @@
 <header ng-controller="HomeController">
-  <button>Navigation</button>
+  <h1 ng-model="teamName">Showing Stats for: {{ team.name }}</h1>
+  <button ng-click="showNav()">Navigation</button>
   <nav>
-    <ul>
+    <ul ng-model="selected" ng-show="selected" class="animate">
       <li>SoccerDash</li>
       <li>Welcome {{ loginObj.user.displayName }}!</li>
-      <li ng-repeat="team in teams"><a href='#' data-team="{{ team.shortName }}">{{ team.fullName }}</a></li>
+      <li>Select a Different Team</li>
+      <li ng-repeat="team in teams" class="team-inset"><a href='#' data-team="{{ team.shortName }}">{{ team.fullName }}</a></li>
+      <li><a href="" ng-click="hideNav()">Close Menu</a></li>
       <li><a href="#" ng-click="loginObj.$logout()">Logout</a></li>
     </ul>
   </nav>
 
   <h1>Showing Stats for: {{ team.name }}</h1>
-
-  <div id="widget-container">
-  </div>
-
 </header>
+
+<div class="widget-list group">
+  <div class="widget-container widget-left" id="test1">
+    Dummy
+  </div>
+  <div class="widget-container widget-right" id="test2">
+    Dummy
+  </div>    
+</div>
+
+<div class="widget-list group">  
+  <div class="widget-container widget-left" id="test3">
+    Dummy
+  </div>
+  <div class="widget-container widget-right" id="test4">
+    Dummy
+  </div>
+</div>
