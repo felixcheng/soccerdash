@@ -1,1 +1,1 @@
-var soccerDashServices = angular.module('soccerDashServices', []);
+var soccerDashServices = angular.module('soccerDashServices', ['ngResource']);
