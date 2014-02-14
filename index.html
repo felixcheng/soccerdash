@@ -6,10 +6,6 @@
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-route.js"></script>
   <script src="lib/angular/angular-resource.js"></script>
-  <!-- Our JS files  -->
-  <script src="js/sdApp.js"></script>
-  <script src="js/sdControllers.js"></script>
-  <script src="js/sdServices.js"></script>
   <!-- d3 --> 
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <!-- jQuery -->
@@ -19,44 +15,14 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header ng-controller="HeaderCtrl">
-    <button>Navigation</button>
-    <nav>
-      <ul>
-        <li>SoccerDash</li>
-        <li>Welcome Bob!</li>
-        <li><a href='#' data-team="arsenal">Arsenal</a></li>
-        <li><a href='#' data-team="aston-villa">Aston Villa</a></li>
-        <li><a href='#' data-team="cardiff-city">Cardiff City</a></li>
-        <li><a href='#' data-team="chelsea">Chelsea</a></li>
-        <li><a href='#' data-team="crystal-palace">Crystal Palace</a></li>
-        <li><a href='#' data-team="everton">Everton</a></li>
-        <li><a href='#' data-team="fulham">Fulham</a></li>
-        <li><a href='#' data-team="hull-city">Hull City</a></li>
-        <li><a href='#' data-team="liverpool">Liverpool</a></li>
-        <li><a href='#' data-team="manchester-city">Manchester City</a></li>
-        <li><a href='#' data-team="manchester-united">Manchester United</a></li>
-        <li><a href='#' data-team="newcastle-united">Newcastle United</a></li>
-        <li><a href='#' data-team="norwich-city">Norwich City</a></li>
-        <li><a href='#' data-team="southampton">Southampton</a></li>
-        <li><a href='#' data-team="stoke-city">Stoke City</a></li>
-        <li><a href='#' data-team="sunderland">Sunderland</a></li>
-        <li><a href='#' data-team="swansea-city">Swansea City</a></li>
-        <li><a href='#' data-team="tottenham-hotspur">Tottenham Hotspur</a></li>
-        <li><a href='#' data-team="west-bromwich-albion">West Bromwich Albion</a></li>
-        <li><a href='#' data-team="west-ham-united">West Ham United</a></li>
-        <li><a href='login.html'>Logout</a></li>
-      </ul>
-    </nav>
 
-    <h1>Showing Stats for: {{ team.name }}</h1>
+  <div ng-view>
 
-  </header>
+  </div>
 
-
-  <div class>
-
-  </div> <!-- / stats-container -->
-
+  <!-- Our JS files  -->
+  <script src="js/sdApp.js"></script>
+  <script src="js/sdControllers.js"></script>
+  <script src="js/sdServices.js"></script>
 </body>
 </html>
