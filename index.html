@@ -1,72 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="soccerDashApp">
 <head>
   <title>SoccerDash</title>
-  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <!-- Angular Resources -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-route.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <!-- Our JS files  -->
+  <script src="js/sdApp.js"></script>
+  <script src="js/sdControllers.js"></script>
+  <script src="js/sdServices.js"></script>
+  <!-- d3 --> 
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <!-- jQuery -->
+  <script src="lib/jquery/jquery-1.10.2.js"></script>  
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-   <div id="setup">
-    <h1>SoccerDash</h1>
-    <button>Select Your Team</button>
-    <div id="team-menu" class="group">
-      <div class="team-menu-left">
-        <ul class="intial-menu team-list">
-          <li><a href='#' data-team="arsenal">Arsenal</a></li>
-          <li><a href='#' data-team="aston-villa">Aston Villa</a></li>
-          <li><a href='#' data-team="cardiff-city">Cardiff City</a></li>
-          <li><a href='#' data-team="chelsea">Chelsea</a></li>
-          <li><a href='#' data-team="crystal-palace">Crystal Palace</a></li>
-          <li><a href='#' data-team="everton">Everton</a></li>
-          <li><a href='#' data-team="fulham">Fulham</a></li>
-          <li><a href='#' data-team="hull-city">Hull City</a></li>
-          <li><a href='#' data-team="liverpool">Liverpool</a></li>
-          <li><a href='#' data-team="manchester-city">Manchester City</a></li>
-        </ul>
-      </div><!-- /team-menu-left -->
-      <div class="team-menu-right">
-        <ul class="intial-menu team-list">
-          <li><a href='#' data-team="manchester-united">Manchester United</a></li>
-          <li><a href='#' data-team="newcastle-united">Newcastle United</a></li>
-          <li><a href='#' data-team="norwich-city">Norwich City</a></li>
-          <li><a href='#' data-team="southampton">Southampton</a></li>
-          <li><a href='#' data-team="stoke-city">Stoke City</a></li>
-          <li><a href='#' data-team="sunderland">Sunderland</a></li>
-          <li><a href='#' data-team="swansea-city">Swansea City</a></li>
-          <li><a href='#' data-team="tottenham-hotspur">Tottenham Hotspur</a></li>
-          <li><a href='#' data-team="west-bromwich-albion">West Bromwich Albion</a></li>
-          <li><a href='#' data-team="west-ham-united">West Ham United</a></li>
-        </ul>
-      </div><!-- /team-menu-right -->
-    </div><!-- /team-menu -->
-  </div><!-- /setup -->
+  <header ng-controller="HeaderCtrl">
+    <button>Navigation</button>
+    <nav>
+      <ul>
+        <li>SoccerDash</li>
+        <li>Welcome Bob!</li>
+        <li><a href='#' data-team="arsenal">Arsenal</a></li>
+        <li><a href='#' data-team="aston-villa">Aston Villa</a></li>
+        <li><a href='#' data-team="cardiff-city">Cardiff City</a></li>
+        <li><a href='#' data-team="chelsea">Chelsea</a></li>
+        <li><a href='#' data-team="crystal-palace">Crystal Palace</a></li>
+        <li><a href='#' data-team="everton">Everton</a></li>
+        <li><a href='#' data-team="fulham">Fulham</a></li>
+        <li><a href='#' data-team="hull-city">Hull City</a></li>
+        <li><a href='#' data-team="liverpool">Liverpool</a></li>
+        <li><a href='#' data-team="manchester-city">Manchester City</a></li>
+        <li><a href='#' data-team="manchester-united">Manchester United</a></li>
+        <li><a href='#' data-team="newcastle-united">Newcastle United</a></li>
+        <li><a href='#' data-team="norwich-city">Norwich City</a></li>
+        <li><a href='#' data-team="southampton">Southampton</a></li>
+        <li><a href='#' data-team="stoke-city">Stoke City</a></li>
+        <li><a href='#' data-team="sunderland">Sunderland</a></li>
+        <li><a href='#' data-team="swansea-city">Swansea City</a></li>
+        <li><a href='#' data-team="tottenham-hotspur">Tottenham Hotspur</a></li>
+        <li><a href='#' data-team="west-bromwich-albion">West Bromwich Albion</a></li>
+        <li><a href='#' data-team="west-ham-united">West Ham United</a></li>
+        <li><a href='login.html'>Logout</a></li>
+      </ul>
+    </nav>
 
-  <div class="stats-container">
-    <header class="group">
-      <nav>
-        <h1>SoccerDash</h1>
-        <h3>Stats for: <span class="full-team-name"></span></h3>
-      </nav>
-    </header>
+    <h1>Showing Stats for: {{ team.name }}</h1>
 
-    <div class="bigBox" id="league-table">
-      <h2>League Table</h2>
-    </div>
-    <div class="smallBox" id="results">
-      <h2>Results (Last 10 matches)</h2>
-    </div>
-    <div class="smallBox" id="top-scorers">
-      <h2>Top Scorers</h2>
-    </div>
-    <div class="smallBox" id="form">
-      <h2>Form (Last 6 matches)</h2>
-    </div>
-    <div class="smallBox" id="fixtures">
-      <h2>Upcoming Fixtures</h2>
-    </div>
+  </header>
+
+
+  <div class>
+
   </div> <!-- / stats-container -->
-  
-  <script src="js/main.js"></script>
+
 </body>
 </html>
