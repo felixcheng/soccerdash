@@ -77,6 +77,17 @@ soccerDashControllers.controller("HomeController", ["$scope", function($scope){
     { shortName: "west-ham-united", fullName: 'West Ham United' }
   ];
 
+  // show / hide for nav
+  $scope.selected = false;
+
+  $scope.showNav = function(){
+    $scope.selected = true;
+  };
+
+  $scope.hideNav = function(){
+    $scope.selected = false;
+  }
+
 }]);
 
 soccerDashControllers.controller("LoginController", ["$scope",

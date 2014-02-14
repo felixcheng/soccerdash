@@ -1,7 +1,3 @@
-#!/usr/bin/env node
-var requesta = require('request');
-var cheerio = require('cheerio');
-
 var util = require('util'),
     http = require('http'),
     fs = require('fs'),
