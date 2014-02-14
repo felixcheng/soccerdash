@@ -1,15 +1,12 @@
 var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase']);
 
 soccerDashControllers.controller("LeagueTblCtrl", ["$scope", "$http",
-  function($scope, $http){      
-    $http({
-      url: "http://api.statsfc.com/table.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&year=2013/2014",    
-      method: "GET",
-      }).success(function (data, status) {
-          $scope.teams = data; 
-        }).error(function (data, status) {
-          $scope.status = status;
-        });
+
+	function($scope, $http){  
+		$http.jsonp("http://api.statsfc.com/table.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&year=2013/2014?callback=JSON_CALLBACK").then( function ( response ) {
+	    $scope.teams = response.data;
+	    console.log($scope)
+		});    
 
     $scope.isFavorite = function(){
       if ($scope.teams.team === $scope.favorite){
@@ -53,6 +50,9 @@ soccerDashControllers.controller('IndexController',
     });
 
 }]);
+=======
+	}]);
+>>>>>>> Change to 'jsonp'
 
 soccerDashControllers.controller("HomeController", ["$scope", function($scope){
   // Array of team objects 
