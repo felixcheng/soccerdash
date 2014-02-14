@@ -1,0 +1,5 @@
+{
+  "firebase": "soccerdashboard",
+  "public": ".",
+  "rules": "firebase/config/security-rules.json"
+}

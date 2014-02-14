@@ -1,18 +1,17 @@
-  <header ng-controller="HeaderCtrl">
-    <button>Navigation</button>
-    <nav>
-      <ul>
-        <li>SoccerDash</li>
-        <li>Welcome Bob!</li>
-        <li ng-repeat="team in teams"><a href='#' data-team="{{ team.shortName }}">{{ team.fullName }}</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </nav>
+<header ng-controller="HomeController">
+  <button>Navigation</button>
+  <nav>
+    <ul>
+      <li>SoccerDash</li>
+      <li>Welcome {{ loginObj.user.displayName }}!</li>
+      <li ng-repeat="team in teams"><a href='#' data-team="{{ team.shortName }}">{{ team.fullName }}</a></li>
+      <li><a href="#" ng-click="loginObj.$logout()">Logout</a></li>
+    </ul>
+  </nav>
 
-    <h1>Showing Stats for: {{ team.name }}</h1>
+  <h1>Showing Stats for: {{ team.name }}</h1>
 
-    <div id="widget-container">
+  <div id="widget-container">
+  </div>
 
-    </div>
-
-  </header>
+</header>

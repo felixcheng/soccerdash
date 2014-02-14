@@ -1,29 +1,60 @@
-var soccerDashControllers  = angular.module('soccerDashControllers', ['soccerDashServices', /*'firebase'*/]);
+var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase']);
 
 soccerDashControllers.controller("LeagueTblCtrl", ["$scope", "$http",
-	function($scope, $http){      
-		$http({
+  function($scope, $http){      
+    $http({
       url: "http://api.statsfc.com/table.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&year=2013/2014",    
       method: "GET",
       }).success(function (data, status) {
-      		$scope.teams = data; 
+          $scope.teams = data; 
         }).error(function (data, status) {
           $scope.status = status;
         });
 
-    $scope.isFavorite= function(){
-    	if ($scope.teams.team === $scope.favorite){
-    		$scope.teams.team.favorite = true; 
-    	}
-    }
-
-	}
-	function($scope, $http){
-
+    $scope.isFavorite = function(){
+      if ($scope.teams.team === $scope.favorite){
+        $scope.teams.team.favorite = true; 
+      }
+    };
 
 }]);
 
-soccerDashControllers.controller("HeaderCtrl", ["$scope", function($scope){
+soccerDashControllers.controller('IndexController',
+  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase',
+    function($scope, $location, $firebaseSimpleLogin, $firebase) {
+
+    //Firebase members data collection
+    var dataRef = new Firebase('https://soccerdashboard.firebaseio.com/members');
+
+    //Firebase/Github Authentication
+    $scope.loginObj = $firebaseSimpleLogin(dataRef);
+
+    //Listening to login
+    $scope.$on("$firebaseSimpleLogin:login", function(evt, user) {
+      console.log("User " + user.id + " successfully logged in!");
+      $location.path("/"); //When a user is logged in, redirect him to the '/''
+      //Add user to the list of members, will not add the user if it already exists because same key
+      $scope.members = $firebase(dataRef);
+      $scope.members[user['id']] = user;
+      $scope.members.$save(user['id']);
+      //Add user to the scope, maybe it could be helpful?
+      $scope.user = user;
+    });
+
+    //Listening to logout
+    $scope.$on("$firebaseSimpleLogin:logout", function(evt) {
+      console.log("User logged out!");
+      $location.path("/login"); //When a user is logged out, redirect him to '/login'
+    });
+
+    //Listening to authentication error
+    $scope.$on("$firebaseSimpleLogin:error", function(err) {
+      console.log("Authentication error: " + err);
+    });
+
+}]);
+
+soccerDashControllers.controller("HomeController", ["$scope", function($scope){
   // Array of team objects 
   $scope.teams = [ 
     { shortName: "arsenal", fullName: 'Arsenal' },
@@ -47,5 +78,10 @@ soccerDashControllers.controller("HeaderCtrl", ["$scope", function($scope){
     { shortName: "west-bromwich-albion", fullName: 'West Bromwich Albion' }, 
     { shortName: "west-ham-united", fullName: 'West Ham United' }
   ];
+
+}]);
+
+soccerDashControllers.controller("LoginController", ["$scope",
+  function($scope){
 
 }]);
