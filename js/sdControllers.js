@@ -3,11 +3,13 @@ var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDash
 soccerDashControllers.controller("LeagueTblCtrl", ["$scope", "$http",
 
 	function($scope, $http){  
+		//Receive the data from api 
 		$http.jsonp("http://api.statsfc.com/table.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&year=2013/2014&callback=JSON_CALLBACK").then( function ( response ) {
 	    $scope.teams = response.data;
 	    console.log($scope)
 		});    
 
+		//Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
     $scope.isFavorite= function(){
     	if ($scope.teams.team === $scope.favorite){
     		$scope.teams.team.favorite = true; 
