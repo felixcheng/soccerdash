@@ -1,0 +1,18 @@
+  <header ng-controller="HeaderCtrl">
+    <button>Navigation</button>
+    <nav>
+      <ul>
+        <li>SoccerDash</li>
+        <li>Welcome Bob!</li>
+        <li ng-repeat="team in teams"><a href='#' data-team="{{ team.shortName }}">{{ team.fullName }}</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+
+    <h1>Showing Stats for: {{ team.name }}</h1>
+
+    <div id="widget-container">
+
+    </div>
+
+  </header>
