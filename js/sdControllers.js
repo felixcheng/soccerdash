@@ -48,7 +48,6 @@ soccerDashControllers.controller('IndexController',
       console.log("Authentication error: " + err);
     });
 
-<<<<<<< HEAD
     //Navigation menu management
     // show / hide for nav
     $scope.selected = false;
@@ -62,13 +61,11 @@ soccerDashControllers.controller('IndexController',
     }
 
 
-=======
     // Array of team objects 
 			// statsfcService.getTeams('premier-league', '2013/2014' )
 			// .then(function(data) {
 			//   $scope.teams = data;
 			// });
->>>>>>> bug fix 0.2
 		//to do- load favorite from firebase
 			$scope.favorite = "Liverpool";
 
