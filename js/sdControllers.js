@@ -34,7 +34,7 @@ soccerDashControllers.controller('IndexController',
       //Add user to the scope, maybe it could be helpful?
       $scope.user = user;
 
-		// Array of team objects 
+  		//After the login, fetch the service to get the list of teams 
 			soccerDashServices.getTeams('premier-league', '2013/2014', )
 			.then(function(data) {
 			  $scope.teams = data;
@@ -53,21 +53,24 @@ soccerDashControllers.controller('IndexController',
       console.log("Authentication error: " + err);
     });
 
+    //Navigation menu management
+    // show / hide for nav
+    $scope.selected = false;
+
+    $scope.showNav = function(){
+      $scope.selected = true;
+    };
+
+    $scope.hideNav = function(){
+      $scope.selected = false;
+    }
+
+
 }]);
 
 soccerDashControllers.controller('HomeController',
  ['$scope', function($scope){
 
- // show / hide for nav
-  $scope.selected = false;
-
-  $scope.showNav = function(){
-    $scope.selected = true;
-  };
-
-  $scope.hideNav = function(){
-    $scope.selected = false;
-  }
 
 }]);
 
