@@ -3,10 +3,17 @@ var soccerDashApp = angular.module('soccerDashApp',
   ['ngRoute', 'ngResource', 'soccerDashControllers', 'soccerDashServices', 'firebase']);
 
 soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcService) {
-	statsfcService.getTeams('premier-league', '2013/2014' )
-	.then(function(data) {
-		$rootScope.teams = data;
-			});
+
+  statsfcService.getTeams('premier-league', '2013/2014' )
+  .then(function(data) {
+    $rootScope.teams = data;
+  });
+
+  statsfcService.getLeague('premier-league', '2013/2014' )
+  .then(function(data) {
+    $rootScope.league = data;
+  });
+
 }]);
 
 //Routes configuration
