@@ -69,10 +69,46 @@ body {
   font-family: 'PT Sans Narrow', sans-serif;
 }
 h1 {
+  font-size: 3.6em;
+  margin: 2% 0;
+}
+h2 {
   font-size: 2.4em;
+  margin: 2% 0;
 }
 ul {
   font-size: 1.8em;
+}
+
+/* Login */
+.login {
+  width: 45%;
+  height: 50%;
+  margin: 20% auto;
+  text-align: center;
+  box-sizing: border-box;
+} 
+.login-button {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 1.8em;
+  width: 35%;
+  margin: 0 auto;
+  padding: 1%;
+  border-radius: 18px;
+  border: 1px solid #AEB3BF;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: .5s linear all; 
+}
+.login-button:hover {
+  border: 1px solid #E83D36;
+}
+.login-button span {
+  display: block;
+  text-align: left;
+  background: url(../img/Twitter_logo_blue3.png) center right no-repeat;
+  padding: 10%;
 }
 
 

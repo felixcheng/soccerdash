@@ -69,12 +69,13 @@ soccerDashControllers.controller('IndexController',
       $scope.selected = false;
     }
 
-
     // Array of team objects 
-			// statsfcService.getTeams('premier-league', '2013/2014' )
-			// .then(function(data) {
-			//   $scope.teams = data;
-			// });
+		statsfcService.getTeams('premier-league', '2013/2014' )
+			.then(function(data) {
+        console.log(data);
+			  $scope.teams = data;
+			});
+
 		//to do- load favorite from firebase
 		$scope.favorite = "Liverpool";
 
