@@ -4,9 +4,9 @@ soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
 
 	function($rootScope, $scope){    
 		//Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
-    console.log($rootScope.teams)
+    console.log($rootScope.league);
     $scope.isFavorite= function(){
-    	for (var n in $rootScope.teams) {
+    	for (var n in $rootScope.league) {
 	    	if ($rootScope[teams][n][team] === $scope.favorite){
 	    		$rootScope.teams.team.favorite = true; 
 	    	}
@@ -15,8 +15,8 @@ soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
 }]);
 
 soccerDashControllers.controller('IndexController',
-  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService',
-    function($scope, $location, $firebaseSimpleLogin, $firebase, statsfcService) {
+  ['$rootScope', '$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService',
+    function($rootScope, $scope, $location, $firebaseSimpleLogin, $firebase, statsfcService) {
 
     //Firebase members data collection
     var dataRef = new Firebase('https://soccerdashboard.firebaseio.com/members');
@@ -30,10 +30,19 @@ soccerDashControllers.controller('IndexController',
       $location.path("/"); //When a user is logged in, redirect him to the '/''
       //Add user to the list of members, will not add the user if it already exists because same key
       $scope.members = $firebase(dataRef);
-      $scope.members[user['id']] = user;
-      $scope.members.$save(user['id']);
-      //Add user to the scope, maybe it could be helpful?
       $scope.user = user;
+      if($scope.members.$child(user['id'])) {
+        console.log('The user does already exists:' + user['id']);
+        $scope.user.new = false;
+      } else {
+        //Create a new member
+        $scope.members[user['id']] = user;
+        $scope.members.$save(user['id']);
+        $scope.user.new = true;
+        console.log('$scope.user.new');
+        console.log($scope.user.new);
+      }
+      //Add user to the scope, maybe it could be helpful?
 
     });
 
@@ -67,7 +76,7 @@ soccerDashControllers.controller('IndexController',
 			//   $scope.teams = data;
 			// });
 		//to do- load favorite from firebase
-			$scope.favorite = "Liverpool";
+		$scope.favorite = "Liverpool";
 
 }]);
 
@@ -87,11 +96,12 @@ soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope",
 	function($rootScope, $scope){  
 		//Copy the data from 'teams' to 'favoriteTeam' for 
 		//the miniLeague Page 
-		var teams = $rootScope.teams;
+		var teams = $rootScope.league;
+    console.log('$scope.favorite');
+    console.log($scope.favorite);
   	for (var n in teams) {
     	if (teams[n].team === $scope.favorite){
     		$scope.favoriteTeam = teams[n];
-
     	}
   	}
   	console.log('favteam', $scope.favoriteTeam)

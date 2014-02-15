@@ -33,4 +33,9 @@
       Dummy
     </div>
   </div>
+  <!-- Pop-up to select a favorite team -->
+  {{ user }} {{ user.new }}
+  <div ng-show="user.new" class="popupTeamSelect">
+    Please pick a team {{ user }} {{ user.new }}
+  </div>
 </div>
