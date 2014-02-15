@@ -1,25 +1,21 @@
 var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase']);
+ 
+soccerDashControllers.controller("LeagueTblCtrl", ["$scope",
 
-soccerDashControllers.controller("LeagueTblCtrl", ["$scope", "$http",
-
-	function($scope, $http){  
-		//Receive the data from api 
-		$http.jsonp("http://api.statsfc.com/table.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&year=2013/2014&callback=JSON_CALLBACK").then( function ( response ) {
-	    $scope.teams = response.data;
-	    console.log($scope)
-		});    
-
+	function($scope){    
 		//Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
     $scope.isFavorite= function(){
-    	if ($scope.teams.team === $scope.favorite){
-    		$scope.teams.team.favorite = true; 
-    	}
+    	for (var n in $scope.teams) {
+	    	if ($scope[teams][n][team] === $scope.favorite){
+	    		$scope.teams.team.favorite = true; 
+	    	}
+	    }
     }
 }]);
 
 soccerDashControllers.controller('IndexController',
-  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase',
-    function($scope, $location, $firebaseSimpleLogin, $firebase) {
+  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'soccerDashServices',
+    function($scope, $location, $firebaseSimpleLogin, $firebase, soccerDashServices) {
 
     //Firebase members data collection
     var dataRef = new Firebase('https://soccerdashboard.firebaseio.com/members');
@@ -37,6 +33,13 @@ soccerDashControllers.controller('IndexController',
       $scope.members.$save(user['id']);
       //Add user to the scope, maybe it could be helpful?
       $scope.user = user;
+
+		// Array of team objects 
+			soccerDashServices.getTeams('premier-league', '2013/2014', )
+			.then(function(data) {
+			  $scope.teams = data;
+			});
+
     });
 
     //Listening to logout
@@ -52,32 +55,10 @@ soccerDashControllers.controller('IndexController',
 
 }]);
 
-soccerDashControllers.controller("HomeController", ["$scope", function($scope){
-  // Array of team objects 
-  $scope.teams = [ 
-    { shortName: "arsenal", fullName: 'Arsenal' },
-    { shortName: "aston-villa", fullName: 'Aston Villa' },
-    { shortName: "cardiff-city", fullName: 'Cardiff City' },
-    { shortName: "chelsea", fullName: 'Chelsea' },
-    { shortName: "crystal-palace", fullName: 'Crystal Palace' },
-    { shortName: "everton", fullName: 'Everton' }, 
-    { shortName: "fulham", fullName: 'Fulham' },
-    { shortName: "hull-city", fullName: 'Hull City' },
-    { shortName: "liverpool", fullName: 'Liverpool' }, 
-    { shortName: "manchester-city", fullName: 'Manchester City' }, 
-    { shortName: "manchester-united", fullName: 'Manchester United' }, 
-    { shortName: "newcastle-united", fullName: 'Newcastle United' },
-    { shortName: "norwich-city", fullName: 'Norwich City' }, 
-    { shortName: "southampton", fullName: 'Southampton' }, 
-    { shortName: "stoke-city", fullName: 'Stoke City' }, 
-    { shortName: "sunderland", fullName: 'Sunderland' }, 
-    { shortName: "swansea-city", fullName: 'Swansea City' }, 
-    { shortName: "tottenham-hotspur", fullName: 'Tottenham Hotspur' }, 
-    { shortName: "west-bromwich-albion", fullName: 'West Bromwich Albion' }, 
-    { shortName: "west-ham-united", fullName: 'West Ham United' }
-  ];
+soccerDashControllers.controller('HomeController',
+ ['$scope', function($scope){
 
-  // show / hide for nav
+ // show / hide for nav
   $scope.selected = false;
 
   $scope.showNav = function(){
@@ -94,3 +75,5 @@ soccerDashControllers.controller("LoginController", ["$scope",
   function($scope){
 
 }]);
+
+
