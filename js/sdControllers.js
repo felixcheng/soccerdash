@@ -1,9 +1,10 @@
-var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase']);
+var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase', 'ngAnimate']);
  
 soccerDashControllers.controller("LeagueTblCtrl", ["$scope",
 
 	function($scope){    
 		//Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
+    console.log($scope.teams)
     $scope.isFavorite= function(){
     	for (var n in $scope.teams) {
 	    	if ($scope[teams][n][team] === $scope.favorite){
@@ -14,8 +15,8 @@ soccerDashControllers.controller("LeagueTblCtrl", ["$scope",
 }]);
 
 soccerDashControllers.controller('IndexController',
-  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'soccerDashServices',
-    function($scope, $location, $firebaseSimpleLogin, $firebase, soccerDashServices) {
+  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService',
+    function($scope, $location, $firebaseSimpleLogin, $firebase, statsfcService) {
 
     //Firebase members data collection
     var dataRef = new Firebase('https://soccerdashboard.firebaseio.com/members');
@@ -33,12 +34,6 @@ soccerDashControllers.controller('IndexController',
       $scope.members.$save(user['id']);
       //Add user to the scope, maybe it could be helpful?
       $scope.user = user;
-
-  		//After the login, fetch the service to get the list of teams 
-			soccerDashServices.getTeams('premier-league', '2013/2014', )
-			.then(function(data) {
-			  $scope.teams = data;
-			});
 
     });
 
@@ -66,6 +61,9 @@ soccerDashControllers.controller('IndexController',
     }
 
 
+		//to do- load favorite from firebase
+			$scope.favorite = "Liverpool";
+
 }]);
 
 soccerDashControllers.controller('HomeController',
@@ -79,4 +77,19 @@ soccerDashControllers.controller("LoginController", ["$scope",
 
 }]);
 
+soccerDashControllers.controller("MiniLeagueCtrl", ["$scope", 
 
+	function($scope){  
+		//Copy the data from 'teams' to 'favoriteTeam' for 
+		//the miniLeague Page 
+		console.log($scope.teams, $scope.favorite)
+  	for (var n in $scope.teams) {
+  		console.log('favteam', $scope.teams[n])
+    	if ($scope.teams[n].team === $scope.favorite){
+    		$scope.favoriteTeam = $scope.teams[n];
+
+    	}
+  	}
+  	console.log('favteam', $scope.favoriteTeam)
+ 
+}]);
