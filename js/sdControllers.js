@@ -1,21 +1,22 @@
-var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase']);
+var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase', 'ngAnimate']);
  
-soccerDashControllers.controller("LeagueTblCtrl", ["$scope",
+soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
 
-	function($scope){    
+	function($rootScope, $scope){    
 		//Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
+    console.log($rootScope.teams)
     $scope.isFavorite= function(){
-    	for (var n in $scope.teams) {
-	    	if ($scope[teams][n][team] === $scope.favorite){
-	    		$scope.teams.team.favorite = true; 
+    	for (var n in $rootScope.teams) {
+	    	if ($rootScope[teams][n][team] === $scope.favorite){
+	    		$rootScope.teams.team.favorite = true; 
 	    	}
 	    }
     }
 }]);
 
 soccerDashControllers.controller('IndexController',
-  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'soccerDashServices',
-    function($scope, $location, $firebaseSimpleLogin, $firebase, soccerDashServices) {
+  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService',
+    function($scope, $location, $firebaseSimpleLogin, $firebase, statsfcService) {
 
     //Firebase members data collection
     var dataRef = new Firebase('https://soccerdashboard.firebaseio.com/members');
@@ -34,12 +35,6 @@ soccerDashControllers.controller('IndexController',
       //Add user to the scope, maybe it could be helpful?
       $scope.user = user;
 
-  		//After the login, fetch the service to get the list of teams 
-			soccerDashServices.getTeams('premier-league', '2013/2014', )
-			.then(function(data) {
-			  $scope.teams = data;
-			});
-
     });
 
     //Listening to logout
@@ -53,6 +48,7 @@ soccerDashControllers.controller('IndexController',
       console.log("Authentication error: " + err);
     });
 
+<<<<<<< HEAD
     //Navigation menu management
     // show / hide for nav
     $scope.selected = false;
@@ -65,6 +61,16 @@ soccerDashControllers.controller('IndexController',
       $scope.selected = false;
     }
 
+
+=======
+    // Array of team objects 
+			// statsfcService.getTeams('premier-league', '2013/2014' )
+			// .then(function(data) {
+			//   $scope.teams = data;
+			// });
+>>>>>>> bug fix 0.2
+		//to do- load favorite from firebase
+			$scope.favorite = "Liverpool";
 
 }]);
 
@@ -79,4 +85,18 @@ soccerDashControllers.controller("LoginController", ["$scope",
 
 }]);
 
+soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope", 
 
+	function($rootScope, $scope){  
+		//Copy the data from 'teams' to 'favoriteTeam' for 
+		//the miniLeague Page 
+		var teams = $rootScope.teams;
+  	for (var n in teams) {
+    	if (teams[n].team === $scope.favorite){
+    		$scope.favoriteTeam = teams[n];
+
+    	}
+  	}
+  	console.log('favteam', $scope.favoriteTeam)
+ 
+}]);
