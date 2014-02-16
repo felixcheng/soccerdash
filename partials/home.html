@@ -13,12 +13,12 @@
   </nav>
 </header>
 
-<div ng-controller="HomeController">
+<div ng-controller="HomeController" class="widgets">
   <div class="widget-list group">
     <div ng-include="'/partials/minileague.html'" ng-controller="MiniLeagueCtrl" class="widget-container widget-left" id="test1">
       Dummy
     </div>
-    <div class="widget-container widget-right" id="test2">
+    <div ng-include="'/partials/recentresult.html'" ng-controller="RecentResult" class="widget-container widget-right" id="test2">
       Dummy
     </div>    
   </div>

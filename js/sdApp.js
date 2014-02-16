@@ -13,7 +13,7 @@ soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcS
   .then(function(data) {
     $rootScope.league = data;
   });
-
+  
 }]);
 
 //Routes configuration

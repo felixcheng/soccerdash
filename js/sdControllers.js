@@ -69,7 +69,8 @@ soccerDashControllers.controller('IndexController',
       $scope.selected = false;
     }
 
-    // Array of team objects 
+    // Array of team objects for Nav menu 
+    // Can this be refactored ? 
 		statsfcService.getTeams('premier-league', '2013/2014' )
 			.then(function(data) {
         console.log(data);
@@ -78,6 +79,7 @@ soccerDashControllers.controller('IndexController',
 
 		//to do- load favorite from firebase
 		$scope.favorite = "Liverpool";
+    $scope.currTeam = "liverpool";
 
 }]);
 
@@ -98,7 +100,6 @@ soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope",
 		//Copy the data from 'teams' to 'favoriteTeam' for 
 		//the miniLeague Page 
 		var teams = $rootScope.league;
-    console.log('$scope.favorite');
     console.log($scope.favorite);
   	for (var n in teams) {
     	if (teams[n].team === $scope.favorite){
@@ -108,3 +109,32 @@ soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope",
   	console.log('favteam', $scope.favoriteTeam)
  
 }]);
+
+
+// Recent Results (small) Controller
+soccerDashControllers.controller("RecentResult", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
+  var teamName = $scope.currTeam;  
+
+  console.log('Recent results:', teamName);
+
+  statsfcService.getResult(teamName)
+    .then(function(data) {
+      $scope.resultData = data;
+
+      console.log($scope.resultData);
+      $scope.date = statsfcService.formatDate(data[0].dateiso);
+      
+      $scope.homeTeam = data[0].home; 
+      $scope.awayTeam = data[0].away; 
+      
+      $scope.homeScore = data[0].fulltime[0];
+      $scope.awayScore = data[0].fulltime[1];
+
+  })
+}]);
+
+
+
+
+
+
