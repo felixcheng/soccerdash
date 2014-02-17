@@ -121,7 +121,6 @@ soccerDashControllers.controller("RecentResult", ["$rootScope", "$scope", "stats
     .then(function(data) {
       $scope.resultData = data;
 
-      console.log($scope.resultData);
       $scope.date = statsfcService.formatDate(data[0].dateiso);
       
       $scope.homeTeam = data[0].home; 
@@ -130,6 +129,16 @@ soccerDashControllers.controller("RecentResult", ["$rootScope", "$scope", "stats
       $scope.homeScore = data[0].fulltime[0];
       $scope.awayScore = data[0].fulltime[1];
 
+      $scope.homeGoals = [];
+      $scope.awayGoals = [];
+
+      for(var i = 0; i < data[0]['incidents'].length; i++) {
+        if($scope.homeTeam === data[0]['incidents'][i]['team']) {
+          $scope.homeGoals.push(data[0]['incidents'][i]);
+        }else {
+          $scope.awayGoals.push(data[0]['incidents'][i]);
+        }
+      }
   })
 }]);
 
