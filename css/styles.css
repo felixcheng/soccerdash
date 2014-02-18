@@ -184,6 +184,13 @@ nav ul li {
     overflow: scroll;
     box-sizing: border-box;
     border-radius: 2%;
+    position: relative;
+  }
+  .expanded-widget .back {
+    font-size: 100%;
+    position: fixed;
+    top : 2%;
+    left: 2%;
   }
 
 
@@ -232,11 +239,11 @@ nav ul li {
   }
 
   /* Team Specific Results */
-  .team-result-container {
+  .team-result-container,
+  .league-result-container {
   width: 100%;
   text-align: center;
   margin-bottom: 1%;
-  border: 1px solid red;
   }
   .results {
     margin: 1% 0;
