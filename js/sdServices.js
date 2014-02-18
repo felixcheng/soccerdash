@@ -76,8 +76,7 @@ soccerDashServices.service('statsfcService',
 
     //Retrieve all league results
     var getLeagueResults = function(competition, year) {
-     var url = 'https://api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition='
-     + competition + '&year=' + year + '&callback=JSON_CALLBACK';
+     var url = 'https://api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&from=2013-08-16&callback=JSON_CALLBACK';
 
      var d = $q.defer();
 
