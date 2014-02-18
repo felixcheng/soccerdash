@@ -2,7 +2,7 @@
   <h2 ng-controller="TeamResultsController">Full Team Results</h2>
   <a href="#/" class="back">Back</a>
   <div ng-repeat="result in resultData" class="team-result-container group">
-    <p>{{ result.dateiso }}</p>
+    <h3>{{ result.dateiso }}</h3>
     <div class="results">
       <div class="home-result">
         <h4><span class="team">{{ result.home }}</span> {{ result.fulltime[0] }}</h4>
