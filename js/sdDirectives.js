@@ -7,19 +7,24 @@ soccerDashApp.directive('ngPochart', function(){
 			$scope.favPo = TeamPo[$scope.favorite];
 		}],
 
-		link: function(scope, iElement){
+		link: function(scope, iElement, iAttrs){
 			var poArr = scope.favPo;
-			plotChart(poArr, iElement);
+			console.log(iAttrs)
+			plotChart(poArr, iElement,iAttrs);
 		}
 	}
 });
 
-var plotChart= function(data, ele){
+var plotChart= function(data, ele, domAttr){
 	
 	//Setting the frame
-	var width = 300;
-	var height = 300;
-	var padding = 30;
+	// 	var width = 300;
+	// var height = 300;
+	// var padding = 30;
+	console.log(domAttr)
+	var width = domAttr.width || 300;
+	var height = domAttr.height || 300;
+	var padding = domAttr.padding || 30;
 	var maxY = 20;
 
 	//Creating co-ordinations (x,y)
@@ -33,11 +38,9 @@ var plotChart= function(data, ele){
 
 	//Putting co-or into a line
 	var line = d3.svg.line()
-								.x(function(d, i){console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
-									return x(i);})
+								.x(function(d, i){return x(i);})
 
-								.y(function(d){console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
-									return y(d);});
+								.y(function(d){return y(d);});
 
 	//Adding d3 object into the DOM
 	var svg = d3.select(ele[0])
@@ -74,7 +77,7 @@ var plotChart= function(data, ele){
 	svg.append('path')
 			.data([data])
 			.attr('d', line)
-			.attr("class", "line");
+			.attr("class", "line")
 			.attr('stroke-width', '20');
 
 }

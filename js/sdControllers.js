@@ -96,8 +96,6 @@ soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope",
 		//Copy the data from 'teams' to 'favoriteTeam' for 
 		//the miniLeague Page 
 		var teams = $rootScope.league;
-    console.log('$scope.favorite');
-    console.log($scope.favorite);
   	for (var n in teams) {
     	if (teams[n].team === $scope.favorite){
     		$scope.favoriteTeam = teams[n];
@@ -202,6 +200,5 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
 soccerDashControllers.controller('TeamSttsCtrl', function($scope) {
 
   $scope.favPo = TeamPo[$scope.favorite];
-  console.log($scope.favPo);
 });
 
