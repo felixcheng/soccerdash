@@ -67,6 +67,7 @@ body {
   font-size: 100%;
   color: #333;
   font-family: 'PT Sans Narrow', sans-serif;
+  box-sizing: border-box;
 }
 h1 {
   font-size: 200%;
@@ -162,7 +163,8 @@ nav ul li {
 }
 
 /* Widget Main Styles */ 
-.widgets h3 {
+.widgets h3,
+.expanded-widget h2 {
   font-size: 150%;
   text-align: center;
   margin: 1% 0;
@@ -173,8 +175,16 @@ nav ul li {
   margin: 1% 0;
 }
 
-
 /* Widget Specific Styles */
+  .expanded-widget {
+    height: 96vh;
+    width: 98%;
+    border: 1px solid black;
+    margin: 1% auto;
+    overflow: scroll;
+    box-sizing: border-box;
+    border-radius: 2%;
+  }
 
   /* Recent Result */
   #test2 {
@@ -213,6 +223,45 @@ nav ul li {
     bottom : 2%;
     left: 2%;
   }
+
+  /* Team Specific Results */
+  .team-result-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1%;
+  border: 1px solid red;
+  }
+  .results {
+    margin: 1% 0;
+  }
+  .results h4 {
+    font-size: 125%;
+  }
+  .home-result,
+  .away-result {
+    width: 49%;
+  }
+  .home-result {
+    float: left;
+    text-align: right
+  }
+  .away-result {
+    float: right;
+    text-align: left
+  }
+  .team-result-container .team {
+    display: inline-block;
+  }
+  .home-result .team {
+    padding-right: 2%;
+  }
+  .away-result .team {
+    padding-left: 2%;
+  }
+  .results .incidents {
+    margin: 1% 0;
+  }  
+
 
 /*David*/
 .popupTeamSelect {
