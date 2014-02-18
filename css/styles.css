@@ -186,6 +186,7 @@ nav ul li {
     border-radius: 2%;
   }
 
+
   /* Recent Result */
   #test2 {
     position: relative;
@@ -222,6 +223,12 @@ nav ul li {
     position: absolute;
     bottom : 2%;
     left: 2%;
+  }
+  .full-results {
+    font-size: 100%;
+    position: absolute;
+    bottom : 2%;
+    right: 2%;    
   }
 
   /* Team Specific Results */
