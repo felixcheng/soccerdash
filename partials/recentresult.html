@@ -1,16 +1,18 @@
 <div class="recent-result">
-  <h3>Last Game</h3>
+  <h3>Last Match</h3>
   <span>{{ date }}</span>
-  <div class="result-container">
+  <div class="result-container group">
     <div class="homeTeam">
-      <h4>{{ homeTeam }}</h4>
+      <h4 class="team-name">{{ homeTeam }}</h4>
       <h4 class="score">{{ homeScore }}</h4>
+      <p ng-repeat="goal in homeGoals">{{ goal.type }} - {{ goal.playershort }} - {{ goal.minute }}</p>
     </div>
     <div class="awayTeam">
-      <h4>{{ awayTeam }}</h4>
+      <h4 class="team-name">{{ awayTeam }}</h4>
       <h4 class="score">{{ awayScore }}</h4>
+      <p ng-repeat="goal in awayGoals">{{ goal.type }} - {{ goal.playershort }} - {{ goal.minute }}</p>
     </div>
   </div>
 
-  <a href="#/">More results</a>
+  <a href="#/teamresults" class="more-results">More {{ favorite }} Results</a>
 </div>

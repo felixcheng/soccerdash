@@ -115,13 +115,10 @@ soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope",
 soccerDashControllers.controller("RecentResult", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
   var teamName = $scope.currTeam;  
 
-  console.log('Recent results:', teamName);
-
   statsfcService.getResult(teamName)
     .then(function(data) {
       $scope.resultData = data;
 
-      console.log($scope.resultData);
       $scope.date = statsfcService.formatDate(data[0].dateiso);
       
       $scope.homeTeam = data[0].home; 
@@ -130,9 +127,49 @@ soccerDashControllers.controller("RecentResult", ["$rootScope", "$scope", "stats
       $scope.homeScore = data[0].fulltime[0];
       $scope.awayScore = data[0].fulltime[1];
 
+      $scope.homeGoals = [];
+      $scope.awayGoals = [];
+
+      for(var i = 0; i < data[0]['incidents'].length; i++) {
+        if($scope.homeTeam === data[0]['incidents'][i]['team']) {
+          $scope.homeGoals.push(data[0]['incidents'][i]);
+        }else {
+          $scope.awayGoals.push(data[0]['incidents'][i]);
+        }
+      }
   })
 }]);
 
+// Specific Team Results controller
+soccerDashControllers.controller("TeamResultsController", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
+  var teamName = $scope.currTeam;
+
+  statsfcService.getTeamResults(teamName)
+    .then(function(data) {
+      for(var i = 0; i < data.length; i++){
+        data[i].dateiso = statsfcService.formatDate(data[i].dateiso); // change dates using helper function
+      }
+      $scope.resultData = data;
+
+      // re-create the match incidents to be split by home / away team
+      for(var i = 0; i < data.length; i++) {
+        var homeIncidents = [];
+        var awayIncidents = [];
+        for(var k = 0; k < data[i]['incidents'].length; k++) {
+          
+          if(data[i]['home'] === data[i]['incidents'][k]['team']) {
+            homeIncidents.push(data[i]['incidents'][k]);
+          }else {
+            awayIncidents.push(data[i]['incidents'][k]);  
+          }              
+        }
+        data[i]['incidents'] = []; // delete the existing incidents array and replace with newly formed arrays
+        data[i]['incidents'].push(homeIncidents);
+        data[i]['incidents'].push(awayIncidents);
+      }
+      console.log(data);      
+  })
+}]);
 
 
 
