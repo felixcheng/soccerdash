@@ -1,6 +1,6 @@
 <div class="expanded-widget">
   <h2 ng-controller="TeamResultsController">Full Team Results</h2>
-  <a href="#/">Back</a>
+  <a href="#/" class="back">Back</a>
   <div ng-repeat="result in resultData" class="team-result-container group">
     <p>{{ result.dateiso }}</p>
     <div class="results">
@@ -13,7 +13,7 @@
       <div class="away-result">
         <h4>{{ result.fulltime[1] }} <span class="team">{{ result.away }}</span></h4>
         <div ng-repeat="incident in result.incidents[1]" class="incidents">
-          {{ incident.type }} - {{ incident.playershort }} - {{ incident.minute }}"
+          {{ incident.type }} - {{ incident.playershort }} {{ incident.minute }}"
         </div>
       </div>
     </div>
