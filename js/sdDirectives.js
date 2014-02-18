@@ -1,3 +1,4 @@
+/// Directive to plot charts
 soccerDashApp.directive('ngPochart', function(){
 	return{
 		restrict: 'EA',
@@ -18,10 +19,7 @@ soccerDashApp.directive('ngPochart', function(){
 var plotChart= function(data, ele, domAttr){
 	
 	//Setting the frame
-	// 	var width = 300;
-	// var height = 300;
-	// var padding = 30;
-	console.log(domAttr)
+
 	var width = domAttr.width || 300;
 	var height = domAttr.height || 300;
 	var padding = domAttr.padding || 30;
@@ -80,4 +78,36 @@ var plotChart= function(data, ele, domAttr){
 			.attr("class", "line")
 			.attr('stroke-width', '20');
 
-}
+};
+
+/// Directive to open modal
+soccerDashApp.directive('modalDialog', function(){
+	return {
+		restrict: 'EA',
+		// templateUrl: 'partials/modal.html',
+		scope: { 
+			show: '='
+		},
+		replace: true,
+		transclude: true,
+
+		link: function(scope, iElement, iAttrs){
+			console.log('in modal')
+ 			scope.dialog ={};
+ 			if (iAttrs.width){
+ 				scope.dialog.width = iAttrs.width;
+ 			}
+ 			if (iAttrs.height){
+ 				scope.dialog.height = iAttrs.height;
+ 			}
+ 			scope.hideModal = function(){
+ 				scope.show = false;
+ 			}
+		},
+
+template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
+
+
+	}
+});
+
