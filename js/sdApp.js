@@ -48,5 +48,6 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
   //  templateUrl: 'partials/portfolio.html',
   //  controller: 'PortfolioCtrl'
   // }).
+
   .otherwise({redirect_to: '/login'})
 }]);
