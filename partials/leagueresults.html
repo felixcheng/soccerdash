@@ -1,0 +1,15 @@
+<div class="expanded-widget">
+  <h2 ng-controller="LeagueResultsController">Full League Results</h2>
+  <a href="#/" class="back">Back</a>
+  <div ng-repeat="result in allResults" class="league-result-container group">
+    <h3>{{ result.date }}</h3>
+    <div ng-repeat="match in result.matches" class="results">
+      <div class="home-result">
+        <h4><span class="team">{{ match.home }}</span> {{ match.fulltime[0] }}</h4>
+      </div>
+      <div class="away-result">
+        <h4>{{ match.fulltime[1] }} <span class="team">{{ match.away }}</span></h4>
+      </div>
+    </div>  
+  </div>
+</div>  
