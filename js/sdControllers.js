@@ -149,7 +149,25 @@ soccerDashControllers.controller("TeamResultsController", ["$rootScope", "$scope
       for(var i = 0; i < data.length; i++){
         data[i].dateiso = statsfcService.formatDate(data[i].dateiso); // change dates using helper function
       }
-      $scope.resultData = data;  
+      $scope.resultData = data;
+
+      // re-create the match incidents to be split by home / away team
+      for(var i = 0; i < data.length; i++) {
+        var homeIncidents = [];
+        var awayIncidents = [];
+        for(var k = 0; k < data[i]['incidents'].length; k++) {
+          
+          if(data[i]['home'] === data[i]['incidents'][k]['team']) {
+            homeIncidents.push(data[i]['incidents'][k]);
+          }else {
+            awayIncidents.push(data[i]['incidents'][k]);  
+          }              
+        }
+        data[i]['incidents'] = []; // delete the existing incidents array and replace with newly formed arrays
+        data[i]['incidents'].push(homeIncidents);
+        data[i]['incidents'].push(awayIncidents);
+      }
+      console.log(data);      
   })
 }]);
 
