@@ -115,8 +115,6 @@ soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope",
 soccerDashControllers.controller("RecentResult", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
   var teamName = $scope.currTeam;  
 
-  console.log('Recent results:', teamName);
-
   statsfcService.getResult(teamName)
     .then(function(data) {
       $scope.resultData = data;
@@ -142,6 +140,18 @@ soccerDashControllers.controller("RecentResult", ["$rootScope", "$scope", "stats
   })
 }]);
 
+// Specific Team Results controller
+soccerDashControllers.controller("TeamResultsController", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
+  var teamName = $scope.currTeam;
+
+  statsfcService.getTeamResults(teamName)
+    .then(function(data) {
+      for(var i = 0; i < data.length; i++){
+        data[i].dateiso = statsfcService.formatDate(data[i].dateiso); // change dates using helper function
+      }
+      $scope.resultData = data;  
+  })
+}]);
 
 
 
