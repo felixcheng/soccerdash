@@ -17,7 +17,6 @@ soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcS
   statsfcService.getLeagueResults('premier-league', '2013/2014' )
   .then(function(data) {
     $rootScope.results = data;
-    console.log('From .run:', $rootScope.results);
   });  
   
 }]);
