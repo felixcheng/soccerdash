@@ -200,7 +200,8 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
 
 
 soccerDashControllers.controller('TeamSttsCtrl', function($scope) {
-  $scope.graph = {'width': 100, 'height': 100};
 
+  $scope.favPo = TeamPo[$scope.favorite];
+  console.log($scope.favPo);
 });
 
