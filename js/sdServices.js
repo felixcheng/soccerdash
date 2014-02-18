@@ -57,6 +57,23 @@ soccerDashServices.service('statsfcService',
      return d.promise;
     };
 
+    //Retrieve specific team results
+    var getTeamResults = function(teamName) {
+     var url = 'https:api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&team=' + teamName + '&year=2013/2014&callback=JSON_CALLBACK';
+
+     var d = $q.defer();
+
+     $http.jsonp(url)
+     .success(function(data, status, headers) {
+       d.resolve(data);
+     })
+     .error(function(data, status, headers) {
+       d.reject(data);
+     });
+
+     return d.promise;
+    };
+
     //Format the ISO dates received by the API
     var formatDate = function(isoString) {
       var date = new Date(isoString);
@@ -89,6 +106,7 @@ soccerDashServices.service('statsfcService',
       getTeams: getTeams,
       getLeague: getLeague,
       getResult: getResult,
+      getTeamResults: getTeamResults,
       formatDate: formatDate
     }
 
