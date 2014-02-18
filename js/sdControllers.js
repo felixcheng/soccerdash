@@ -156,7 +156,6 @@ soccerDashControllers.controller("TeamResultsController", ["$rootScope", "$scope
         var homeIncidents = [];
         var awayIncidents = [];
         for(var k = 0; k < data[i]['incidents'].length; k++) {
-          
           if(data[i]['home'] === data[i]['incidents'][k]['team']) {
             homeIncidents.push(data[i]['incidents'][k]);
           }else {
@@ -166,9 +165,42 @@ soccerDashControllers.controller("TeamResultsController", ["$rootScope", "$scope
         data[i]['incidents'] = []; // delete the existing incidents array and replace with newly formed arrays
         data[i]['incidents'].push(homeIncidents);
         data[i]['incidents'].push(awayIncidents);
-      }
-      console.log(data);      
+      }      
   })
+}]);
+
+
+// Full League Results controller
+soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
+
+  statsfcService.getLeagueResults()
+    .then(function(data) {
+      $scope.resultsData = data;
+
+      for(var i = 0; i < $scope.resultsData.length; i++) {
+        $scope.resultsData[i].dateiso = statsfcService.formatDate($scope.resultsData[i].dateiso); // change dates using helper function
+      }
+
+      $scope.allResults = [];
+
+      var date = $scope.resultsData[0].dateiso; // set target date to date of first match
+      var matchDateArray = []; // array to place all matches of same date 
+
+      for(var i = 0; i < $scope.resultsData.length; i++) {
+        if($scope.resultsData[i].dateiso === date) {
+          matchDateArray.push($scope.resultsData[i]);
+        }else {
+          var matchObj = {};
+          matchObj['date'] = date;
+          matchObj['matches'] = matchDateArray;
+          $scope.allResults.push(matchObj);
+          matchObj = {};
+          matchDateArray = []; // reset to empty array
+          date = $scope.resultsData[i].dateiso;
+          matchDateArray.push($scope.resultsData[i]);
+        }
+      }
+    })
 }]);
 
 
