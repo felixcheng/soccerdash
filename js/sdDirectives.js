@@ -62,11 +62,6 @@ var plotChart= function(data, ele){
 			.attr('class','yaxis')
 			.call(yAxis);
 
-	
-
-  // x.domain(d3.extent(data, function(d) { return d.date; }));
-  // y.domain(d3.extent(data, function(d) { return d.close; }));
-
 	svg.append('path')
 			.data([data])
 			.attr('d', line)
