@@ -13,11 +13,6 @@ soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcS
   .then(function(data) {
     $rootScope.league = data;
   });
-
-  statsfcService.getLeagueResults('premier-league', '2013/2014' )
-  .then(function(data) {
-    $rootScope.results = data;
-  });  
   
 }]);
 
