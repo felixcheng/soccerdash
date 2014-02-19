@@ -211,3 +211,14 @@ soccerDashControllers.controller('ModalCtrl', function($scope) {
   };
 });
 
+// Team Top Scorers Controller
+soccerDashControllers.controller("TeamTopScorersController", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
+
+  $scope.goalData = [];
+  for(var i = 0; i < 8; i++) { // this appears to stop the widget container from appearing - refactor in drective? 
+    $scope.goalData.push($rootScope.goalData[i])
+  }
+
+}]);
+
+
