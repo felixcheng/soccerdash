@@ -91,6 +91,24 @@ soccerDashServices.service('statsfcService',
      return d.promise;
     };
 
+    //Retrieve Team Top Scorers
+    var getTeamTopScorers = function(teamName) {
+     var url = 'http://api.statsfc.com/top-scorers.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&team=' + teamName + '&year=2013/2014&callback=JSON_CALLBACK';
+
+     var d = $q.defer();
+
+     $http.jsonp(url)
+     .success(function(data, status, headers) {
+       d.resolve(data);
+     })
+     .error(function(data, status, headers) {
+       d.reject(data);
+     });
+
+     return d.promise;
+    };
+
+
 
     //Format the ISO dates received by the API
     var formatDate = function(isoString) {
@@ -126,6 +144,7 @@ soccerDashServices.service('statsfcService',
       getResult: getResult,
       getTeamResults: getTeamResults,
       getLeagueResults: getLeagueResults,
+      getTeamTopScorers: getTeamTopScorers,
       formatDate: formatDate
     }
 

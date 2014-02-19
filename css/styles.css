@@ -276,6 +276,16 @@ nav ul li {
     margin: 1% 0;
   }  
 
+  /* Team Top Scorers */
+  .chart .data-rep {
+    background-color: red;
+    margin: 1% 0;
+    height: 10px;
+  }
+  .team-top-scorers {
+    padding: 1%;
+  }
+
 
 /*David*/
 .popupTeamSelect {
