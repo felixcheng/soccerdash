@@ -101,7 +101,7 @@ soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope",
     		$scope.favoriteTeam = teams[n];
     	}
   	}
-    console.log('fav', $scope.favoriteTeam) 
+    console.log('fav', $scope.favorite, $scope.favoriteTeam) 
 }]);
 
 

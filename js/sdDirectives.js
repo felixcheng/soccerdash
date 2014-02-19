@@ -10,14 +10,26 @@ soccerDashApp.directive('ngPochart', function(){
 
 		link: function(scope, iElement, iAttrs){
 			var poArr = scope.favPo;
-			console.log(iAttrs)
-			plotChart(poArr, iElement,iAttrs);
+			window.onresize = function() {
+				console.log('resize')
+        scope.$apply();
+      };
+	    scope.$watch(function() {
+	      return angular.element(window)[0].innerWidth;
+	    }, function() {
+	      scope.render();
+	    });
+
+	    scope.render = function() {
+				plotChart(poArr, iElement,iAttrs);
+			}
 		}
 	}
 });
 
 var plotChart= function(data, ele, domAttr){
 	
+	d3.select(ele[0]).selectAll('*').remove();
 	//Setting the frame
 
 	var width = domAttr.width || 300;
@@ -84,7 +96,7 @@ var plotChart= function(data, ele, domAttr){
 soccerDashApp.directive('modalDialog', function(){
 	return {
 		restrict: 'EA',
-		// templateUrl: 'partials/modal.html',
+		// templateUrl: '/partials/leaguetbl.html',
 		scope: { 
 			show: '='
 		},

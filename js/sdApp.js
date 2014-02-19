@@ -38,7 +38,10 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
   .when('/teamstatus', {
     templateUrl: 'partials/teamstatus.html',
     controller: 'TeamSttsCtrl'
-
+  })
+  .when('/modal', {
+    templateUrl: 'partials/modal.html',
+    controller: 'ModalCtrl'
   })
   .when('/leagueresults', {
     templateUrl: 'partials/leagueresults.html',

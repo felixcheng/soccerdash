@@ -311,6 +311,7 @@ path {
   stroke: #000;
 }
 
+/*modal*/
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
   position:absolute;
