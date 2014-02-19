@@ -95,7 +95,6 @@ var plotChart= function(data, ele, domAttr){
 soccerDashApp.directive('modalDialog', function(){
 	return {
 		restrict: 'EA',
-		// templateUrl: '/partials/leaguetbl.html',
 		scope: { 
 			show: '='
 		},
