@@ -6,21 +6,19 @@
       <li>SoccerDash</li>
       <li>Welcome {{ loginObj.user.displayName }}!</li>
       <li>Select a Different Team</li>
-      <li ng-repeat="team in teams" class="team-inset"><a href='#' data-team="{{ team.shortName }}">{{ team.fullName }}</a></li>
+      <li ng-repeat="team in teams" class="team-inset"><a href='#' data-team="{{ team.path }}">{{ team.name }}</a></li>
       <li><a href="" ng-click="hideNav()">Close Menu</a></li>
       <li><a href="#" ng-click="loginObj.$logout()">Logout</a></li>
     </ul>
   </nav>
-
-  <h1>Showing Stats for: {{ team.name }}</h1>
 </header>
 
-<div ng-controller="HomeController">
+<div ng-controller="HomeController" class="widgets">
   <div class="widget-list group">
     <div ng-include="'/partials/minileague.html'" ng-controller="MiniLeagueCtrl" class="widget-container widget-left" id="test1">
       Dummy
     </div>
-    <div class="widget-container widget-right" id="test2">
+    <div ng-include="'/partials/recentresult.html'" ng-controller="RecentResult" class="widget-container widget-right" id="test2">
       Dummy
     </div>    
   </div>
@@ -32,5 +30,10 @@
     <div class="widget-container widget-right" id="test4">
       Dummy
     </div>
+  </div>
+  <!-- Pop-up to select a favorite team -->
+  {{ user }} {{ user.new }}
+  <div ng-show="user.new" class="popupTeamSelect">
+    Please pick a team {{ user }} {{ user.new }}
   </div>
 </div>
