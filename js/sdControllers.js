@@ -4,7 +4,6 @@ soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
 
 	function($rootScope, $scope){    
 		//Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
-    console.log($rootScope.league);
     $scope.isFavorite= function(){
     	for (var n in $rootScope.league) {
 	    	if ($rootScope[teams][n][team] === $scope.favorite){
@@ -69,17 +68,14 @@ soccerDashControllers.controller('IndexController',
       $scope.selected = false;
     }
 
-    // Array of team objects for Nav menu 
-    // Can this be refactored ? 
+    // Array of team objects 
 		statsfcService.getTeams('premier-league', '2013/2014' )
 			.then(function(data) {
-        console.log(data);
 			  $scope.teams = data;
 			});
 
 		//to do- load favorite from firebase
 		$scope.favorite = "Liverpool";
-    $scope.currTeam = "liverpool";
 
 }]);
 
@@ -100,14 +96,12 @@ soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope",
 		//Copy the data from 'teams' to 'favoriteTeam' for 
 		//the miniLeague Page 
 		var teams = $rootScope.league;
-    console.log($scope.favorite);
   	for (var n in teams) {
     	if (teams[n].team === $scope.favorite){
     		$scope.favoriteTeam = teams[n];
     	}
   	}
-  	console.log('favteam', $scope.favoriteTeam)
- 
+    console.log('fav', $scope.favorite, $scope.favoriteTeam) 
 }]);
 
 
@@ -204,6 +198,15 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
 }]);
 
 
+soccerDashControllers.controller('TeamSttsCtrl', function($scope) {
+  $scope.favPo = TeamPo[$scope.favorite];
+});
 
-
+//Modal controller
+soccerDashControllers.controller('ModalCtrl', function($scope) {
+  $scope.modalShown= false;
+  $scope.toggleModal = function(){
+    $scope.modalShown = !$scope.modalShown;
+  };
+});
 

@@ -13,7 +13,7 @@ soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcS
   .then(function(data) {
     $rootScope.league = data;
   });
-  
+
 }]);
 
 //Routes configuration
@@ -35,6 +35,14 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
     templateUrl: 'partials/teamresults.html',
     controller: 'TeamResultsController'
   })
+  .when('/teamstatus', {
+    templateUrl: 'partials/teamstatus.html',
+    controller: 'TeamSttsCtrl'
+  })
+  .when('/modal', {
+    templateUrl: 'partials/modal.html',
+    controller: 'ModalCtrl'
+  })
   .when('/leagueresults', {
     templateUrl: 'partials/leagueresults.html',
     controller: 'LeagueResultsController'
@@ -43,5 +51,6 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
   //  templateUrl: 'partials/portfolio.html',
   //  controller: 'PortfolioCtrl'
   // }).
+
   .otherwise({redirect_to: '/login'})
 }]);

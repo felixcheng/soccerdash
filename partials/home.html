@@ -13,26 +13,28 @@
   </nav>
 </header>
 
-<div ng-controller="HomeController" class="widgets">
+<div ng-controller="HomeController">
   <div class="widget-list group">
     <div ng-include="'/partials/minileague.html'" ng-controller="MiniLeagueCtrl" class="widget-container widget-left" id="test1">
-      Dummy
     </div>
-    <div ng-include="'/partials/recentresult.html'" ng-controller="RecentResult" class="widget-container widget-right" id="test2">
+    <div class="widget-container widget-right" id="test2">
+
+    <div></div>
       Dummy
     </div>    
   </div>
 
   <div class="widget-list group">  
     <div class="widget-container widget-left" id="test3">
-      Dummy
+      <center><div ng-pochart width='300' height='100' padding='10'></div></center>
+      <a href="#/teamstatus">Full Chart</a>
     </div>
     <div class="widget-container widget-right" id="test4">
       Dummy
     </div>
   </div>
   <!-- Pop-up to select a favorite team -->
-  {{ user }} {{ user.new }}
+<!--   {{ user }} {{ user.new }} -->
   <div ng-show="user.new" class="popupTeamSelect">
     Please pick a team {{ user }} {{ user.new }}
   </div>
