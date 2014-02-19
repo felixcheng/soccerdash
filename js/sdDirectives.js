@@ -11,7 +11,6 @@ soccerDashApp.directive('ngPochart', function(){
 		link: function(scope, iElement, iAttrs){
 			var poArr = scope.favPo;
 			window.onresize = function() {
-				console.log('resize')
         scope.$apply();
       };
 	    scope.$watch(function() {
@@ -104,7 +103,6 @@ soccerDashApp.directive('modalDialog', function(){
 		transclude: true,
 
 		link: function(scope, iElement, iAttrs){
-			console.log('in modal')
  			scope.dialog ={};
  			if (iAttrs.width){
  				scope.dialog.width = iAttrs.width;
