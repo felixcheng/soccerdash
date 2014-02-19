@@ -76,6 +76,7 @@ soccerDashControllers.controller('IndexController',
 
 		//to do- load favorite from firebase
 		$scope.favorite = "Liverpool";
+    $scope.currTeam = "liverpool";
 
 }]);
 
