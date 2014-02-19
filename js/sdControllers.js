@@ -199,16 +199,13 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
 
 
 soccerDashControllers.controller('TeamSttsCtrl', function($scope) {
-
   $scope.favPo = TeamPo[$scope.favorite];
 });
 
 //Modal controller
 soccerDashControllers.controller('ModalCtrl', function($scope) {
-  console.log('modalctrl')
   $scope.modalShown= false;
   $scope.toggleModal = function(){
-    console.log('click');
     $scope.modalShown = !$scope.modalShown;
   };
 });
