@@ -100,7 +100,8 @@ ul {
 .login h2 {
   color: #fff;
 } 
-.login-button {
+.login-button,
+header button {
   font-family: 'Fjalla One', sans-serif;
   font-size: 100%;
   margin: 0 auto;
@@ -110,28 +111,39 @@ ul {
   border: none;
   color: #fff;
   cursor: pointer;
-  transition: .5s linear all; 
+  transition: .5s linear all;
+  outline: none; 
 }
 .login-button:hover {
   opacity: .85;
 }
 
 /* Navigation */
-header { 
+header {
+  position: relative; 
 }
 header h1 {
   margin-top: 1%;
   text-align: center;
+  color: #fff;
+}
+header button {
+  font-size: 100%;
+  padding: 1%;
+  position: absolute;
+  top: 2%;
+  left: 2%;  
 }
 nav {
   position: absolute;
   z-index: 100;
   clear: both;
   width: 25%;
+  color: #fff;
+  background-color: #2d3278;
 }
 nav ul li {
-  padding: 1% 1%;
-  border: 1px solid black;
+  padding: 1% 2%;
 }
 .team-inset {
   padding-left: 7.5%;
@@ -152,18 +164,19 @@ nav ul li {
   margin-bottom: 2%;
 }
 .widget-container {
-  min-height: 40vh;
-  width: 30%;
-  border: 1px solid black;
+  min-height: 41vh;
+  width: 35%;
+  border-radius: 12px;
   background-color: #fff;
+  opacity: .85;
 }
 .widget-left {
   float: left;
-  margin-left: 15%;
+  margin-left: 10%;
 }
 .widget-right {
   float: right;
-  margin-right: 15%;
+  margin-right: 10%;
 }
 
 /* Widget Main Styles */ 
@@ -187,8 +200,9 @@ nav ul li {
     margin: 1% auto;
     overflow: auto;
     box-sizing: border-box;
-    border-radius: 2%;
+    border-radius: 12px;
     position: relative;
+    background-color: #fff;
   }
   .expanded-widget .back {
     font-size: 100%;
