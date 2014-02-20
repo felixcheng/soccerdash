@@ -26,10 +26,10 @@
   </div>
 
   <div class="widget-list group">  
+    <div ng-include="'/partials/teamstatus.html'" ng-controller="TeamSttsCtrl" class="widget-container widget-left" id="test3">
+    </div>
     <div class="widget-container widget-left" id="test3">
-      <center><h3>Position Chart</h3></center>
-      <center><div ng-pochart width='500' height='280' padding='10'></div></center>
-      <a href="#/teamstatus">Full Chart</a>
+
     </div>
     <div ng-include="'/partials/teamTopScorers.html'" ng-controller="TeamTopScorersController" class="widget-container widget-right" id="test4">
       Dummy

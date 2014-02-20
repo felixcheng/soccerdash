@@ -1,20 +1,22 @@
 var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase', 'ngAnimate']);
  
 soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
-
-	function($rootScope, $scope){    
+	function($rootScope, $scope){   
 		//Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
     $scope.isFavorite= function(){
+      console.log('root', $scope.favorite)
     	for (var n in $rootScope.league) {
 	    	if ($rootScope[teams][n][team] === $scope.favorite){
-	    		$rootScope.teams.team.favorite = true; 
+	    		$rootScope.teams.team.favorite = true;
 	    	}
 	    }
     }
+    console.log('cu', $scope.currentTeam)
+    // $scope.isFavorite();
 }]);
 
 soccerDashControllers.controller('IndexController',
-  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService',
+  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService', "$rootScope",
     function($scope, $location, $firebaseSimpleLogin, $firebase, statsfcService) {
 
     //Firebase members data collection
@@ -58,9 +60,21 @@ soccerDashControllers.controller('IndexController',
           //The favorite team is based on Firebase snapshop data and inserted in the $scope.user object
           console.log('snapshot.val().favoriteTeam', snapshot.val().favoriteTeam);
           $scope.user.favoriteTeam = snapshot.val().favoriteTeam;
+          console.log('favteam', $scope.user.favoriteTeam.team)
           //Set the current team as the favorite team
           $scope.currentTeam = snapshot.val().favoriteTeam;
           console.log('$scope.currentTeam.teamshort', $scope.currentTeam.teamshort);
+
+          $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
+          $scope.favPo = TeamPo[$scope.currentTeam.team];
+          $scope.$watch($scope.favPo, function() {
+            console.log('change I');
+            $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
+            $scope.chartToPlot=function(){
+              console.log('change II');
+              $scope.toPlot();
+            }
+          });
           //Get the results of the current team
           fetchResult($scope.currentTeam);
           //When a user already exists, redirect him to the '/''
@@ -143,7 +157,7 @@ soccerDashControllers.controller('IndexController',
 }]);
 
 soccerDashControllers.controller('HomeController',
- ['$scope', function($scope){
+  ['$scope', function($scope){
 
 }]);
 
@@ -276,7 +290,12 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
 
 
 soccerDashControllers.controller('TeamSttsCtrl', function($scope) {
-  $scope.favPo = TeamPo[$scope.favorite];
+  // $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
+  // $scope.$watch($scope.favPo, function() {
+  //   console.log('change C');
+  //   $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
+  // });
+  // $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
 });
 
 //Modal controller

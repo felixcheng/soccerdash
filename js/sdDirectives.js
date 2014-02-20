@@ -5,7 +5,7 @@ soccerDashApp.directive('ngPochart', function(){
 		template: '<div><div ng-transclude>Position Change </div>',
 		transclude: true,
 		controller:  ['$scope', function($scope){
-			$scope.favPo = TeamPo[$scope.favorite];
+			$scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
 		}],
 
 		link: function(scope, iElement, iAttrs){
@@ -13,12 +13,23 @@ soccerDashApp.directive('ngPochart', function(){
 			window.onresize = function() {
         scope.$apply();
       };
+
 	    scope.$watch(function() {
 	      return angular.element(window)[0].innerWidth;
 	    }, function() {
 	      scope.render();
 	    });
 
+	    scope.$watch(scope.favPo, function() {
+	    	console.log('change D')
+	      scope.render();
+	    });
+
+	    scope.toPlot= function(){
+	    	console.log('to plot');
+	    	plotChart(poArr, iElement,iAttrs);
+	    };
+	    
 	    scope.render = function() {
 	    	iElement[0].innerHTML = "";
 				plotChart(poArr, iElement,iAttrs);
@@ -28,6 +39,7 @@ soccerDashApp.directive('ngPochart', function(){
 });
 
 var plotChart= function(data, ele, domAttr){
+	console.log('plot', data)
 	var width = domAttr.width || 300;
 	var height = domAttr.height || 300;
 	var padding = domAttr.padding || 30;
@@ -35,7 +47,7 @@ var plotChart= function(data, ele, domAttr){
 
 	var svg = dimple.newSvg(ele[0], width, height);
 
-	console.log(true)
+	// console.log(true)
 
 	var dataCon = [];
 	data.forEach(function (d, ind) {
