@@ -63,6 +63,13 @@ table {
 
 /* Main Styles */
 /* Main Styles */
+html {
+  background: url(../img/anfield-the-kop.gif) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 body {
   font-size: 100%;
   color: #333;
