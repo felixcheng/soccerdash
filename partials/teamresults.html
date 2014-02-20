@@ -1,21 +1,23 @@
 <div class="expanded-widget">
-  <h2 ng-controller="TeamResultsController">Full Team Results</h2>
-  <a href="#/" class="back">Back</a>
-  <div ng-repeat="result in resultData" class="team-result-container group">
-    <h3>{{ result.dateiso }}</h3>
-    <div class="results">
-      <div class="home-result">
-        <h4><span class="team">{{ result.home }}</span> {{ result.fulltime[0] }}</h4>
-        <div ng-repeat="incident in result.incidents[0]" class="incidents">
-          {{ incident.minute }}" {{ incident.playershort }} - {{ incident.type }}  
+  <div class="expanded-widget-container">
+    <h2 ng-controller="TeamResultsController">Full Team Results</h2>
+    <a href="#/" class="back">Back</a>
+    <div ng-repeat="result in resultData" class="team-result-container group">
+      <h3>{{ result.dateiso }}</h3>
+      <div class="results">
+        <div class="home-result">
+          <h4><span class="team">{{ result.home }}</span> {{ result.fulltime[0] }}</h4>
+          <div ng-repeat="incident in result.incidents[0]" class="incidents">
+            {{ incident.minute }}" {{ incident.playershort }} - {{ incident.type }}  
+          </div>
+        </div>
+        <div class="away-result">
+          <h4>{{ result.fulltime[1] }} <span class="team">{{ result.away }}</span></h4>
+          <div ng-repeat="incident in result.incidents[1]" class="incidents">
+            {{ incident.type }} - {{ incident.playershort }} {{ incident.minute }}"
+          </div>
         </div>
       </div>
-      <div class="away-result">
-        <h4>{{ result.fulltime[1] }} <span class="team">{{ result.away }}</span></h4>
-        <div ng-repeat="incident in result.incidents[1]" class="incidents">
-          {{ incident.type }} - {{ incident.playershort }} {{ incident.minute }}"
-        </div>
-      </div>
-    </div>
-  </div>
+    </div><!-- /team result container -->
+  </div> <!-- /expanded widget container -->  
 </div>  
