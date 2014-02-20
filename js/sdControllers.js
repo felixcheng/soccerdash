@@ -175,6 +175,7 @@ soccerDashControllers.controller("MiniLeagueCtrl",
   //The favorite team is now available in the user object
   //The teams detailed info (league) is available in the scope of IndexController
 
+
 }]);
 
 
