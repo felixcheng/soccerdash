@@ -95,30 +95,26 @@ ul {
   margin: 20% auto;
   text-align: center;
   box-sizing: border-box;
+}
+.login h1,
+.login h2 {
+  color: #fff;
 } 
 .login-button {
   font-family: 'Fjalla One', sans-serif;
-  font-size: 1.8em;
-  width: 35%;
+  font-size: 100%;
   margin: 0 auto;
-  padding: 1%;
+  padding: 1% 4%;
   border-radius: 18px;
-  border: 1px solid #AEB3BF;
-  background-color: #fff;
-  color: #333;
+  background-color: #782d30;
+  border: none;
+  color: #fff;
   cursor: pointer;
   transition: .5s linear all; 
 }
 .login-button:hover {
-  border: 1px solid #E83D36;
+  opacity: .85;
 }
-.login-button span {
-  display: block;
-  text-align: left;
-  background: url(../img/Twitter_logo_blue3.png) center right no-repeat;
-  padding: 10%;
-}
-
 
 /* Navigation */
 header { 
@@ -159,6 +155,7 @@ nav ul li {
   min-height: 40vh;
   width: 30%;
   border: 1px solid black;
+  background-color: #fff;
 }
 .widget-left {
   float: left;
