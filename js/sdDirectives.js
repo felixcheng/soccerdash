@@ -27,68 +27,54 @@ soccerDashApp.directive('ngPochart', function(){
 });
 
 var plotChart= function(data, ele, domAttr){
-	
-	d3.select(ele[0]).selectAll('*').remove();
-	//Setting the frame
-
 	var width = domAttr.width || 300;
 	var height = domAttr.height || 300;
 	var padding = domAttr.padding || 30;
 	var maxY = 20;
 
-	//Creating co-ordinations (x,y)
-	var x = d3.scale.linear()
-						.domain([0, data.length])
-						.range([0, width]);
+	var svg = dimple.newSvg(ele[0], width, height);
 
-	var y = d3.scale.linear()
-						.domain([maxY, 0])
-						.range([height, 0]);
+	console.log(true)
 
-	//Putting co-or into a line
-	var line = d3.svg.line()
-								.x(function(d, i){return x(i);})
+	var dataCon = [];
+	data.forEach(function (d, ind) {
+		var temp ={}
+    temp["Position"] = d;
+    temp["Week"] = ind+1;
+    // temp["Value"] = 1;
+    dataCon.push(temp)
+  }, this);
 
-								.y(function(d){return y(d);});
+    // Create the chart area
+    var myChart = new dimple.chart(svg, dataCon);
+    // myChart.setBounds(70, 40, 490, 320);
+    
+    // Add the x axises 
+    var x = myChart.addCategoryAxis("x", "Week");
 
-	//Adding d3 object into the DOM
-	var svg = d3.select(ele[0])
-						.append('svg:svg')
-						.attr('width', width)
-						.attr('height', height)
-						.append('g')
-							.attr('transform', 'translate('+padding+', '+padding+')');
+    // x.addOrderRule("Week");
+    var y = myChart.addMeasureAxis("y", "Position");
+    
+    // Setting min and max dates requires them to be set
+    // as actual javascript date objects
+    x.overrideMin = 0;
+    x.overrideMax = 30;
+    y.overrideMin = 21;
+    y.overrideMax = 1;
+s
+    // Add the bubble series for shift values first so that it is
+    // drawn behind the lines
+    myChart.addSeries(null, dimple.plot.bubble);
 
+    // Add the line series on top of the bubbles.  The bubbles
+    // and line points will naturally fall in the same places
+    var s = myChart.addSeries(null, dimple.plot.line);
 
-	//Creating the axises
-	var xAxis = d3.svg.axis().scale(x)
-    						.orient("top") 
-    						.tickSize(-height)
-    						.ticks(5);
+    // Add line markers to the line because it looks nice
+    s.lineMarkers = true;
 
-	var yAxis = d3.svg.axis().scale(y)
-								.orient('left')
-								.ticks(5);
-	
-	//Appending the axises
-	svg.append('g')
-			.attr('class','xaxis')
-			//Move the x-axis from the top of the chart (default) to the bottom
-			.attr("transform", "translate(0," + height*0.9 + ")")
-			.call(xAxis);								
-	
-	svg.append('g')
-			.attr('class','yaxis')
-			.call(yAxis);
-
-
-	//Adding the 'path'(chart line) into the graph
-	svg.append('path')
-			.data([data])
-			.attr('d', line)
-			.attr("class", "line")
-			.attr('stroke-width', '20');
-
+    // Draw everything
+    myChart.draw();
 };
 
 /// Directive to open modal
