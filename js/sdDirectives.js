@@ -20,6 +20,7 @@ soccerDashApp.directive('ngPochart', function(){
 	    });
 
 	    scope.render = function() {
+	    	iElement[0].innerHTML = "";
 				plotChart(poArr, iElement,iAttrs);
 			}
 		}
