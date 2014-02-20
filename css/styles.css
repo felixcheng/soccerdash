@@ -181,7 +181,7 @@ nav ul li {
     width: 98%;
     border: 1px solid black;
     margin: 1% auto;
-    overflow: scroll;
+    overflow: auto;
     box-sizing: border-box;
     border-radius: 2%;
     position: relative;
@@ -212,7 +212,7 @@ nav ul li {
     margin-top: 2%;
     width: 49%;
     text-align: center;
-    overflow: scroll;
+    overflow: auto;
   }
   .homeTeam {
     float: left;
