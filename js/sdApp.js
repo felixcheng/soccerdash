@@ -4,10 +4,11 @@ var soccerDashApp = angular.module('soccerDashApp',
 
 soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcService) {
 
-  statsfcService.getTeams('premier-league', '2013/2014' )
-  .then(function(data) {
-    $rootScope.teams = data;
-  });
+  // statsfcService.getTeams('premier-league', '2013/2014' )
+  // .then(function(data) {
+  //   var teams = data;
+  //   $rootScope.teams = teams;
+  // });
 
   statsfcService.getLeague('premier-league', '2013/2014' )
   .then(function(data) {
@@ -31,6 +32,10 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
   .when('/login', {
     templateUrl: "partials/login.html",
     controller: "LoginController"
+  })
+  .when('/select', {
+    templateUrl: "partials/selectfavoriteteam.html",
+    controller: "SelectController"
   })
   .when('/league', {
     templateUrl: 'partials/leaguetbl.html',

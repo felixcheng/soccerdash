@@ -1,6 +1,6 @@
 <h3>Current Position</h3>
 
-<h2>{{favoriteTeam.position}}</h2>
+<h2>{{currentTeam.position}}</h2>
 <div class=>
 	<table class ='miniLeague'>
 	<thead>
@@ -17,14 +17,14 @@
 	</thead>
 	<tbody>
 		<tr class="miniLeagueCon">
-		<td> {{favoriteTeam.played}} </td>
-		<td> {{favoriteTeam.won}} </td>
-		<td> {{favoriteTeam.drawn}} </td>
-		<td> {{favoriteTeam.lost}} </td>
-		<td> {{favoriteTeam.for}} </td>
-		<td> {{favoriteTeam.against}} </td>
-		<td> {{favoriteTeam.differenee}} </td>
-		<td> {{favoriteTeam.points}} </td>
+		<td> {{currentTeam.played}} </td>
+		<td> {{currentTeam.won}} </td>
+		<td> {{currentTeam.drawn}} </td>
+		<td> {{currentTeam.lost}} </td>
+		<td> {{currentTeam.for}} </td>
+		<td> {{currentTeam.against}} </td>
+		<td> {{currentTeam.differenee}} </td>
+		<td> {{currentTeam.points}} </td>
 		</tr>
 	</tbody>
 
@@ -52,7 +52,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="team in league" class="leagueContent" ng-class="{true: 'favorite'}[isFavorite]">
+				<tr ng-repeat="team in teams" class="leagueContent" ng-class="{true: 'favorite'}[isFavorite]">
 				<td> {{team.position}} </td>
 				<td> {{team.team}} </td>
 				<td> {{team.played}} </td>

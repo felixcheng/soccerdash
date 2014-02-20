@@ -14,34 +14,60 @@ soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
 }]);
 
 soccerDashControllers.controller('IndexController',
-  ['$rootScope', '$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService',
-    function($rootScope, $scope, $location, $firebaseSimpleLogin, $firebase, statsfcService) {
+  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService',
+    function($scope, $location, $firebaseSimpleLogin, $firebase, statsfcService) {
 
     //Firebase members data collection
     var dataRef = new Firebase('https://soccerdashboard.firebaseio.com/members');
+    $scope.members = $firebase(dataRef);
 
     //Firebase/Github Authentication
     $scope.loginObj = $firebaseSimpleLogin(dataRef);
 
     //Listening to login
     $scope.$on("$firebaseSimpleLogin:login", function(evt, user) {
+
       console.log("User " + user.id + " successfully logged in!");
-      $location.path("/"); //When a user is logged in, redirect him to the '/''
-      //Add user to the list of members, will not add the user if it already exists because same key
-      $scope.members = $firebase(dataRef);
+
+      //Load the teams detailed data when user has logged in
+      statsfcService.getLeague('premier-league','2013/2014')
+      .then(function(data) {
+        $scope.teams = data;
+      });
+
+      //Add current user to the scope
       $scope.user = user;
-      if($scope.members.$child(user['id'])) {
-        console.log('The user does already exists:' + user['id']);
-        $scope.user.new = false;
-      } else {
-        //Create a new member
-        $scope.members[user['id']] = user;
-        $scope.members.$save(user['id']);
-        $scope.user.new = true;
-        console.log('$scope.user.new');
-        console.log($scope.user.new);
-      }
-      //Add user to the scope, maybe it could be helpful?
+
+      //Test if the new user does already exist in the app members
+      var userRef = new Firebase('https://soccerdashboard.firebaseio.com/members/' + user['id']);
+      //Listen to the 'value' event only once, the event is triggered when async data is received from Firebase
+      userRef.once('value', function(snapshot) {
+        //If it is a new user, create a firebase member and set its new attribute to true
+        //The new attribute will be used to decide if the 'Select a fav team' pop up must be displayed
+        if(snapshot.val() === null) {
+          console.log('User ' + user['id'] + ' does not exist.');
+          //Create a new member
+          $scope.members[user['id']] = user;
+          $scope.members.$save(user['id']);
+          //When a user is new, redirect him to the '/select''
+          $location.path("/select");
+          //If it is an existing user, get the fav team, set the curr team, get the fav team results and redirect him to '/'
+        } else {
+          console.log('The user does already exists:' + user['id']);
+          console.log('snapshot', snapshot);
+          //The favorite team is based on Firebase snapshop data and inserted in the $scope.user object
+          console.log('snapshot.val().favoriteTeam', snapshot.val().favoriteTeam);
+          $scope.user.favoriteTeam = snapshot.val().favoriteTeam;
+          //Set the current team as the favorite team
+          $scope.currentTeam = snapshot.val().favoriteTeam;
+          console.log('$scope.currentTeam.teamshort', $scope.currentTeam.teamshort);
+          //Get the results of the current team
+          fetchResult($scope.currentTeam);
+          //When a user already exists, redirect him to the '/''
+          $location.path("/");
+
+        }
+      });
 
     });
 
@@ -68,76 +94,125 @@ soccerDashControllers.controller('IndexController',
       $scope.selected = false;
     }
 
-    // Array of team objects 
-		statsfcService.getTeams('premier-league', '2013/2014' )
-			.then(function(data) {
-			  $scope.teams = data;
-			});
+    //Store the favorite team in the user object and in the Firebase member data
+    $scope.selectFavoriteTeam = function(team) {
+      $scope.user.favoriteTeam = team;
+      $scope.members[$scope.user.id].favoriteTeam = team;
+      $scope.members.$save($scope.user.id);
+      //Set the current team as the favorite team when logging in the first time and selecting your fav team
+      $scope.currentTeam = team;
+      //Get the results of the new current team
+      fetchResult(team);
+    };
 
-		//to do- load favorite from firebase
-		$scope.favorite = "Liverpool";
-    $scope.currTeam = "liverpool";
+    //Select another current team
+    // $scope.favorite = "Liverpool";
+    // $scope.currTeam = "liverpool";
+    $scope.selectCurrentTeam = function(team) {
+      $scope.currentTeam = team;
+      fetchResult(team);
+    };
+
+    //Moved from the controller 'RecentResult'
+    var fetchResult = function(team) {
+      statsfcService.getResult(team.teamshort)
+      .then(function(data) {
+        $scope.resultData = data;
+
+        $scope.date = statsfcService.formatDate(data[0].dateiso);
+        
+        $scope.homeTeam = data[0].home; 
+        $scope.awayTeam = data[0].away; 
+        
+        $scope.homeScore = data[0].fulltime[0];
+        $scope.awayScore = data[0].fulltime[1];
+
+        $scope.homeGoals = [];
+        $scope.awayGoals = [];
+
+        for(var i = 0; i < data[0]['incidents'].length; i++) {
+          if($scope.homeTeam === data[0]['incidents'][i]['team']) {
+            $scope.homeGoals.push(data[0]['incidents'][i]);
+          }else {
+            $scope.awayGoals.push(data[0]['incidents'][i]);
+          }
+        }
+      });
+    };
 
 }]);
 
 soccerDashControllers.controller('HomeController',
  ['$scope', function($scope){
 
+}]);
+
+soccerDashControllers.controller("LoginController",
+  ["$scope", function($scope){
 
 }]);
 
-soccerDashControllers.controller("LoginController", ["$scope",
-  function($scope){
+soccerDashControllers.controller("SelectController",
+  ["$scope", function($scope){
 
 }]);
 
-soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope", 
+// soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope", 
 
-	function($rootScope, $scope){  
-		//Copy the data from 'teams' to 'favoriteTeam' for 
-		//the miniLeague Page 
-		var teams = $rootScope.league;
-  	for (var n in teams) {
-    	if (teams[n].team === $scope.favorite){
-    		$scope.favoriteTeam = teams[n];
-    	}
-  	}
-    console.log('fav', $scope.favorite, $scope.favoriteTeam) 
+// 	function($rootScope, $scope){  
+// 		//Copy the data from 'teams' to 'favoriteTeam' for 
+// 		//the miniLeague Page 
+// 		var teams = $rootScope.league;
+//   	for (var n in teams) {
+//     	if (teams[n].team === $scope.user.favoriteTeam){
+//     		$scope.favoriteTeam = teams[n];
+//     	}
+//   	}
+//     console.log('fav', $scope.favorite, $scope.favoriteTeam) 
+// }]);
+soccerDashControllers.controller("MiniLeagueCtrl",
+  ["$scope", function($scope){
+  //The favorite team is now available in the user object
+  //The teams detailed info (league) is available in the scope of IndexController
+
 }]);
 
 
 // Recent Results (small) Controller
 soccerDashControllers.controller("RecentResult", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
-  var teamName = $scope.currTeam;  
 
-  statsfcService.getResult(teamName)
-    .then(function(data) {
-      $scope.resultData = data;
+  //Ben, I had to move this code in the IndexController because it needs to run when the current team is known and when it changes
+  //i.e. when a user has logged in. I don't like to have everything in the IndexController but I don't see another solution...
+  // var teamName = $scope.currentTeam;
 
-      $scope.date = statsfcService.formatDate(data[0].dateiso);
+  // statsfcService.getResult(teamName)
+  //   .then(function(data) {
+  //     $scope.resultData = data;
+
+  //     $scope.date = statsfcService.formatDate(data[0].dateiso);
       
-      $scope.homeTeam = data[0].home; 
-      $scope.awayTeam = data[0].away; 
+  //     $scope.homeTeam = data[0].home; 
+  //     $scope.awayTeam = data[0].away; 
       
-      $scope.homeScore = data[0].fulltime[0];
-      $scope.awayScore = data[0].fulltime[1];
+  //     $scope.homeScore = data[0].fulltime[0];
+  //     $scope.awayScore = data[0].fulltime[1];
 
-      $scope.homeGoals = [];
-      $scope.awayGoals = [];
+  //     $scope.homeGoals = [];
+  //     $scope.awayGoals = [];
 
-      for(var i = 0; i < data[0]['incidents'].length; i++) {
-        if($scope.homeTeam === data[0]['incidents'][i]['team']) {
-          $scope.homeGoals.push(data[0]['incidents'][i]);
-        }else {
-          $scope.awayGoals.push(data[0]['incidents'][i]);
-        }
-      }
-  })
+  //     for(var i = 0; i < data[0]['incidents'].length; i++) {
+  //       if($scope.homeTeam === data[0]['incidents'][i]['team']) {
+  //         $scope.homeGoals.push(data[0]['incidents'][i]);
+  //       }else {
+  //         $scope.awayGoals.push(data[0]['incidents'][i]);
+  //       }
+  //     }
+  // })
 }]);
 
 // Specific Team Results controller
 soccerDashControllers.controller("TeamResultsController", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
-  var teamName = $scope.currTeam;
+  var teamName = $scope.currentTeam.teamshort;
 
   statsfcService.getTeamResults(teamName)
     .then(function(data) {

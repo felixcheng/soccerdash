@@ -317,11 +317,17 @@ nav li a {
     padding: 1%;
   }
 
-
-/*David*/
+/* David- Popup for a new user to select a favorite team */
 .popupTeamSelect {
+  border: 1px darkgrey solid;
+  background-color: white;
+  color: black;
+  position: fixed;
+  top: 30%;
+  left: 30%;
   width: 40%;
   height: 40%;
+  z-index: 100;
 }
 
 /*line-graph*/
