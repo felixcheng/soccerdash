@@ -76,6 +76,9 @@ body {
   font-family: 'PT Sans Narrow', sans-serif;
   box-sizing: border-box;
 }
+a {
+  text-decoration: none;
+}
 h1 {
   font-size: 200%;
   margin: 2% 0;
@@ -101,12 +104,14 @@ ul {
   color: #fff;
 } 
 .login-button,
-header button {
+header button,
+.widget-link,
+.expanded-widget .back {
   font-family: 'Fjalla One', sans-serif;
   font-size: 100%;
   margin: 0 auto;
   padding: 1% 4%;
-  border-radius: 18px;
+  border-radius: 12px;
   background-color: #782d30;
   border: none;
   color: #fff;
@@ -182,6 +187,7 @@ nav li a {
   border-radius: 12px;
   background-color: #fff;
   opacity: .85;
+  position: relative;
 }
 .widget-left {
   float: left;
@@ -205,30 +211,46 @@ nav li a {
   margin: 1% 0;
 }
 
+
 /* Widget Specific Styles */
   .expanded-widget {
     height: 96vh;
     width: 98%;
-    border: 1px solid black;
     margin: 1% auto;
-    overflow: auto;
     box-sizing: border-box;
     border-radius: 12px;
     position: relative;
     background-color: #fff;
+    opacity: .85;
+  }
+  .expanded-widget-container {
+    height: 94vh;
+    width: 98%;
+    margin: 0 auto;
+    overflow: auto;
   }
   .expanded-widget .back {
-    font-size: 100%;
+    font-size: 80%;
     position: fixed;
-    top : 2%;
+    top : 3%;
+    left: 3%;
+    padding: 1% 2%;
+  }
+  .widget-link {
+    font-size: 80%;
+    position: absolute;
+    bottom : 2%;
+    text-decoration: none;
+    background-color: #2d3278;
+  }
+  .button-left {
     left: 2%;
   }
-
+  .button-right {
+    right: 2%;    
+  }
 
   /* Recent Result */
-  #test2 {
-    position: relative;
-  }
   .recent-result span {
     font-size: 125%;
     display: block;
@@ -255,18 +277,6 @@ nav li a {
   .awayTeam p {
     font-size: 100%;
     padding: 2% 0;
-  }
-  .more-results {
-    font-size: 100%;
-    position: absolute;
-    bottom : 2%;
-    left: 2%;
-  }
-  .full-results {
-    font-size: 100%;
-    position: absolute;
-    bottom : 2%;
-    right: 2%;    
   }
 
   /* Team Specific Results */
@@ -317,7 +327,35 @@ nav li a {
     padding: 1%;
   }
 
-/* David- Popup for a new user to select a favorite team */
+  /* League Table (expanded) */
+  .league-table {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .leaguefull {
+    margin: auto;
+    width: 55%;
+  }
+  .leaguefull th {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 1%;
+  }
+  .leaguefull .team-column {
+    width: 18%;
+  }
+  .leaguefull .goal-diff {
+    width: 10%;
+  }  
+  .league-content .team-name {
+    text-align: left;
+  }
+  td {
+    text-align: center;
+    padding: 1.15% 0;
+  }
+
+
+/*David*/
 .popupTeamSelect {
   border: 1px darkgrey solid;
   background-color: white;
