@@ -1,0 +1,9 @@
+<!-- Select a favorite team -->
+<div class="popupTeamSelect">
+  <ul>
+    <li>{{ user.displayName }}, please pick a team!</li>
+    <li ng-repeat="team in teams">
+      <a href='#' data-team="{{ team.teampath }}" ng-click="selectFavoriteTeam(team)">{{ team.team }}</a>
+    </li>
+  </ul>
+</div>
