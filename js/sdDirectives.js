@@ -20,15 +20,10 @@ soccerDashApp.directive('ngPochart', function(){
 	      scope.render();
 	    });
 
-	    scope.$watch(scope.favPo, function() {
-	    	console.log('change D')
-	      scope.render();
-	    });
-
-	    scope.toPlot= function(){
-	    	console.log('to plot');
-	    	plotChart(poArr, iElement,iAttrs);
-	    };
+	    // scope.$watch(scope.favPo, function() {
+	    // 	console.log('change D')
+	    //   scope.render();
+	    // });
 	    
 	    scope.render = function() {
 	    	iElement[0].innerHTML = "";
@@ -39,15 +34,12 @@ soccerDashApp.directive('ngPochart', function(){
 });
 
 var plotChart= function(data, ele, domAttr){
-	console.log('plot', data)
 	var width = domAttr.width || 300;
 	var height = domAttr.height || 300;
 	var padding = domAttr.padding || 30;
 	var maxY = 20;
 
 	var svg = dimple.newSvg(ele[0], width, height);
-
-	// console.log(true)
 
 	var dataCon = [];
 	data.forEach(function (d, ind) {

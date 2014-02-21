@@ -67,20 +67,15 @@ soccerDashControllers.controller('IndexController',
 
           $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
           $scope.favPo = TeamPo[$scope.currentTeam.team];
-          $scope.$watch($scope.favPo, function() {
-            console.log('change I');
-            $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
-            $scope.chartToPlot=function(){
-              console.log('change II');
-              $scope.toPlot();
-            }
-          });
+
           //Get the results of the current team
           fetchResult($scope.currentTeam);
           //When a user already exists, redirect him to the '/''
           $location.path("/");
 
         }
+        $scope.show = true;
+        //$scope.$broadcast('loaded', $scope.currentTeam)
       });
 
     });
@@ -290,12 +285,7 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
 
 
 soccerDashControllers.controller('TeamSttsCtrl', function($scope) {
-  // $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
-  // $scope.$watch($scope.favPo, function() {
-  //   console.log('change C');
-  //   $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
-  // });
-  // $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
+
 });
 
 //Modal controller
@@ -308,11 +298,11 @@ soccerDashControllers.controller('ModalCtrl', function($scope) {
 
 // Team Top Scorers Controller
 soccerDashControllers.controller("TeamTopScorersController", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
-
-  $scope.goalData = [];
-  for(var i = 0; i < 8; i++) { // this appears to stop the widget container from appearing - refactor in drective? 
-    $scope.goalData.push($rootScope.goalData[i])
-  }
+  //Ben: strangely enough, it works when the code below is commented out;
+  // $scope.goalData = [];
+  // for(var i = 0; i < 8; i++) { // this appears to stop the widget container from appearing - refactor in drective? 
+  //   $scope.goalData.push($rootScope.goalData[i])
+  // }
 
 }]);
 
