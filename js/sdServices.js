@@ -49,7 +49,7 @@ soccerDashServices.service('statsfcService',
     //Retrieve most recent result
     var getResult = function(teamName) {
      //David: I added missing // in the url
-     var url = 'https://api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&team=' + teamName + '&limit=1&callback=JSON_CALLBACK';
+     var url = 'https://api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&team=' + teamName + '&limit=5&callback=JSON_CALLBACK';
      var config = {
       cache: true
      };
