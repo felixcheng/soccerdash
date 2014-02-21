@@ -126,24 +126,30 @@ soccerDashControllers.controller('IndexController',
     var fetchResult = function(team) {
       statsfcService.getResult(team.teampath) //needs to be teampath
       .then(function(data) {
-        $scope.resultData = data;
+        $scope.resultData = [];  
 
-        $scope.date = statsfcService.formatDate(data[0].dateiso);
+        for(var i = 0; i < data.length; i++) {
+          if(data[i]['status'] === 'Finished') {
+            $scope.resultData.push(data[i]);     
+          }
+        }  
+
+        $scope.date = statsfcService.formatDate($scope.resultData[0].dateiso);
         
-        $scope.homeTeam = data[0].home; 
-        $scope.awayTeam = data[0].away; 
+        $scope.homeTeam = $scope.resultData[0].home; 
+        $scope.awayTeam = $scope.resultData[0].away; 
         
-        $scope.homeScore = data[0].fulltime[0];
-        $scope.awayScore = data[0].fulltime[1];
+        $scope.homeScore = $scope.resultData[0].fulltime[0];
+        $scope.awayScore = $scope.resultData[0].fulltime[1];
 
         $scope.homeGoals = [];
         $scope.awayGoals = [];
 
-        for(var i = 0; i < data[0]['incidents'].length; i++) {
-          if($scope.homeTeam === data[0]['incidents'][i]['team']) {
-            $scope.homeGoals.push(data[0]['incidents'][i]);
+        for(var i = 0; i < $scope.resultData[0]['incidents'].length; i++) {
+          if($scope.homeTeam === $scope.resultData[0]['incidents'][i]['team']) {
+            $scope.homeGoals.push($scope.resultData[0]['incidents'][i]);
           }else {
-            $scope.awayGoals.push(data[0]['incidents'][i]);
+            $scope.awayGoals.push($scope.resultData[0]['incidents'][i]);
           }
         }
       });
