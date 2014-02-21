@@ -5,7 +5,7 @@ soccerDashApp.directive('ngPochart', function(){
 		template: '<div><div ng-transclude>Position Change </div>',
 		transclude: true,
 		controller:  ['$scope', function($scope){
-			$scope.favPo = TeamPo[$scope.favorite];
+			$scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
 		}],
 
 		link: function(scope, iElement, iAttrs){
@@ -13,12 +13,18 @@ soccerDashApp.directive('ngPochart', function(){
 			window.onresize = function() {
         scope.$apply();
       };
+
 	    scope.$watch(function() {
 	      return angular.element(window)[0].innerWidth;
 	    }, function() {
 	      scope.render();
 	    });
 
+	    // scope.$watch(scope.favPo, function() {
+	    // 	console.log('change D')
+	    //   scope.render();
+	    // });
+	    
 	    scope.render = function() {
 	    	iElement[0].innerHTML = "";
 				plotChart(poArr, iElement,iAttrs);
@@ -34,8 +40,6 @@ var plotChart= function(data, ele, domAttr){
 	var maxY = 20;
 
 	var svg = dimple.newSvg(ele[0], width, height);
-
-	console.log(true)
 
 	var dataCon = [];
 	data.forEach(function (d, ind) {

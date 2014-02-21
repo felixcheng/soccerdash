@@ -18,6 +18,8 @@ soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcS
   statsfcService.getTeamTopScorers('liverpool')
   .then(function(data) {
     $rootScope.goalData = data;
+    $rootScope.showGoal = true
+    console.log('root promise')
   });  
 
 }]);
