@@ -222,7 +222,7 @@ soccerDashControllers.controller("RecentResult", ["$rootScope", "$scope", "stats
 
 // Specific Team Results controller
 soccerDashControllers.controller("TeamResultsController", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
-  var teamName = $scope.currentTeam.teamshort;
+  var teamName = $scope.currentTeam.teampath;
 
   statsfcService.getTeamResults(teamName)
     .then(function(data) {
