@@ -261,7 +261,13 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
 
   statsfcService.getLeagueResults()
     .then(function(data) {
-      $scope.resultsData = data;
+      $scope.resultsData = [];  
+
+      for(var i = 0; i < data.length; i++) {
+        if(data[i]['status'] === 'Finished') {
+          $scope.resultsData.push(data[i]);     
+        }
+      }
 
       for(var i = 0; i < $scope.resultsData.length; i++) {
         $scope.resultsData[i].dateiso = statsfcService.formatDate($scope.resultsData[i].dateiso); // change dates using helper function
