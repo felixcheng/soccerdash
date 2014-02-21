@@ -232,10 +232,17 @@ soccerDashControllers.controller("TeamResultsController", ["$rootScope", "$scope
 
   statsfcService.getTeamResults(teamName)
     .then(function(data) {
-      for(var i = 0; i < data.length; i++){
-        data[i].dateiso = statsfcService.formatDate(data[i].dateiso); // change dates using helper function
+      $scope.resultData = [];  
+
+      for(var i = 0; i < data.length; i++) {
+        if(data[i]['status'] === 'Finished') {
+          $scope.resultData.push(data[i]);     
+        }
       }
-      $scope.resultData = data;
+
+      for(var i = 0; i < $scope.resultData.length; i++){
+        $scope.resultData[i].dateiso = statsfcService.formatDate($scope.resultData[i].dateiso); // change dates using helper function
+      }
 
       // re-create the match incidents to be split by home / away team
       for(var i = 0; i < data.length; i++) {
