@@ -38,7 +38,7 @@ var plotChart= function(data, ele, domAttr){
 	var height = domAttr.height || 300;
 	var padding = domAttr.padding || 30;
 	var maxY = 20;
-
+	console.log(domAttr)
 	var svg = dimple.newSvg(ele[0], width, height);
 
 	var dataCon = [];
@@ -121,7 +121,7 @@ soccerDashApp.directive('ngTopScorers', function($parse) {
 
     link: function (scope, element, attrs) {
       var maxGoals = scope.data[0]['goals'];
-
+      element[0].innerHTML = "";
       var chart = d3.select(element[0])
         chart.append("div").attr("class", "chart")
         .selectAll('div')
