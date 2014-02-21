@@ -124,7 +124,7 @@ soccerDashControllers.controller('IndexController',
 
     //Moved from the controller 'RecentResult'
     var fetchResult = function(team) {
-      statsfcService.getResult(team.teamshort)
+      statsfcService.getResult(team.teampath) //needs to be teampath
       .then(function(data) {
         $scope.resultData = data;
 
