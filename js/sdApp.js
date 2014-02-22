@@ -15,11 +15,11 @@ soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcS
     $rootScope.league = data;
   });
 
-  statsfcService.getTeamTopScorers('liverpool')
-  .then(function(data) {
-    $rootScope.goalData = data;
-    $rootScope.showGoal = true;
-  });  
+  // statsfcService.getTeamTopScorers('liverpool')
+  // .then(function(data) {
+  //   $rootScope.goalData = data;
+  //   $rootScope.showGoal = true;
+  // });  
 
 }]);
 
