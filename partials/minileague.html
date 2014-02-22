@@ -1,9 +1,51 @@
 <div class="current-position inner-widget-container">  
-  <h3>Current Position</h3>
+  <h3>Current League Position</h3>
 
   <h3>{{currentTeam.position}}</h3>
-  <div class=>
-  	<table class ='miniLeague'>
+  <div class="current-position">
+    <div class="stats-left">
+      <table>
+        <tr>
+          <td class="category">Played:</td>
+          <td>{{ currentTeam.played }}</td>    
+        </tr>
+        <tr>
+          <td class="category">Won:</td>
+          <td>{{ currentTeam.won }}</td>    
+        </tr>
+        <tr>
+          <td class="category">Drawn:</td>
+          <td>{{ currentTeam.drawn }}</td>    
+        </tr>
+        <tr>
+          <td class="category">Lost:</td>
+          <td>{{ currentTeam.lost }}</td>    
+        </tr>        
+      </table>
+    </div>
+    <div class="stats-right">
+      <table>
+        <tr>
+          <td class="category">Goals For:</td>
+          <td>{{ currentTeam.for }}</td>    
+        </tr>
+        <tr>
+          <td class="category">Goals Against:</td>
+          <td>{{ currentTeam.against }}</td>    
+        </tr>
+        <tr>
+          <td class="category">Goal Difference:</td>
+          <td>{{ currentTeam.difference }}</td>    
+        </tr>
+        <tr>
+          <td class="category">Points:</td>
+          <td>{{ currentTeam.points }}</td>    
+        </tr>        
+      </table>
+
+    </div>
+
+<!--   	<table class ='miniLeague'>
     	<thead>
     		<tr>
     			<th scope='col'> Played </th>
@@ -28,7 +70,7 @@
     		<td> {{currentTeam.points}} </td>
     		</tr>
     	</tbody>
-  	</table>
+  	</table> -->
   </div>
   <a href="#/league" class="button-left widget-link">Full Table</a>
 </div>
