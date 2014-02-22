@@ -70,6 +70,8 @@ soccerDashControllers.controller('IndexController',
 
           //Get the results of the current team
           fetchResult($scope.currentTeam);
+          //testing
+          fetchTopScorers($scope.currentTeam);
           //When a user already exists, redirect him to the '/''
           $location.path("/");
 
@@ -112,6 +114,8 @@ soccerDashControllers.controller('IndexController',
       $scope.currentTeam = team;
       //Get the results of the new current team
       fetchResult(team);
+      //testing
+      fetchTopScorers(team);
     };
 
     //Select another current team
@@ -120,6 +124,8 @@ soccerDashControllers.controller('IndexController',
     $scope.selectCurrentTeam = function(team) {
       $scope.currentTeam = team;
       fetchResult(team);
+      //testing
+      fetchTopScorers(team);
     };
 
     //Moved from the controller 'RecentResult'
@@ -152,6 +158,19 @@ soccerDashControllers.controller('IndexController',
             $scope.awayGoals.push($scope.resultData[0]['incidents'][i]);
           }
         }
+      });
+    };
+
+    var fetchTopScorers = function(team) {
+      $scope.showGoal = false;
+      
+      statsfcService.getTeamTopScorers(team.teampath)
+      .then(function(data) {
+        $scope.goalData = [];
+        for(var i = 0; i < 8; i++) { 
+          $scope.goalData.push(data[i]);
+        }
+        $scope.showGoal = true;
       });
     };
 
@@ -322,7 +341,6 @@ soccerDashControllers.controller("TeamTopScorersController", ["$rootScope", "$sc
   // for(var i = 0; i < 8; i++) { // this appears to stop the widget container from appearing - refactor in drective? 
   //   $scope.goalData.push($rootScope.goalData[i])
   // }
-
 }]);
 
 
