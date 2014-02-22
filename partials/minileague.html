@@ -10,7 +10,7 @@
           <td>{{ currentTeam.played }}</td>    
         </tr>
         <tr>
-          <td class="category">Won:</td>
+          <td class="category positive">Won:</td>
           <td>{{ currentTeam.won }}</td>    
         </tr>
         <tr>
@@ -18,7 +18,7 @@
           <td>{{ currentTeam.drawn }}</td>    
         </tr>
         <tr>
-          <td class="category">Lost:</td>
+          <td class="category negative">Lost:</td>
           <td>{{ currentTeam.lost }}</td>    
         </tr>        
       </table>
@@ -42,35 +42,7 @@
           <td>{{ currentTeam.points }}</td>    
         </tr>        
       </table>
-
     </div>
-
-<!--   	<table class ='miniLeague'>
-    	<thead>
-    		<tr>
-    			<th scope='col'> Played </th>
-    			<th scope='col'> Won </th>
-    			<th scope='col'> Drawn </th>
-    			<th scope='col'> Lost </th>
-    			<th scope='col'> GF </th>
-    			<th scope='col'> GA </th>
-    			<th scope='col'> Goal Diff </th>
-    			<th scope='col'> Points </th>
-    		</tr>
-    	</thead>
-    	<tbody>
-    		<tr class="miniLeagueCon">
-    		<td> {{currentTeam.played}} </td>
-    		<td> {{currentTeam.won}} </td>
-    		<td> {{currentTeam.drawn}} </td>
-    		<td> {{currentTeam.lost}} </td>
-    		<td> {{currentTeam.for}} </td>
-    		<td> {{currentTeam.against}} </td>
-    		<td> {{currentTeam.difference}} </td>
-    		<td> {{currentTeam.points}} </td>
-    		</tr>
-    	</tbody>
-  	</table> -->
   </div>
   <a href="#/league" class="button-left widget-link">Full Table</a>
 </div>
