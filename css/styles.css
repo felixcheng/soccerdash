@@ -203,7 +203,7 @@ nav li a {
 .expanded-widget h2 {
   font-size: 150%;
   text-align: center;
-  margin: 1% 0;
+  margin: 1.5% 0;
 }
 .widget-container h4 {
   font-size: 150%;
@@ -327,6 +327,40 @@ nav li a {
     padding: 1%;
   }
 
+  /* Current League Position */
+  .stats-left,
+  .stats-right {
+    width: 49%;
+  }
+  .stats-left {
+    float: left;
+  }
+  .stats-right {
+    float: right;
+  }
+  .stats-left table,
+  .stats-right table {   
+    font-size: 120%;
+    margin: 0 5%;
+    width: 98%;
+  }
+  .current-position td {
+    padding: 8% 3%;
+  }
+  .current-position tr {
+    width: 100%;
+  }
+  .current-position .category {
+    width: 50%;
+    text-align: left;
+  }
+  .positive {
+    color: #2d784f;
+  }
+  .negative {
+    color: #782d30;
+  }
+
   /* League Table (expanded) */
   .league-table {
     width: 100%;
@@ -353,6 +387,7 @@ nav li a {
     text-align: center;
     padding: 1.15% 0;
   }
+
 
 
 /*David*/
