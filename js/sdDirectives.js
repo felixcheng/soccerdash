@@ -20,13 +20,14 @@ soccerDashApp.directive('ngPochart', function(){
 	      scope.render();
 	    });
 
-	    // scope.$watch(scope.favPo, function() {
-	    // 	console.log('change D')
-	    //   scope.render();
-	    // });
+	    scope.$watch(scope.favPo, function() {
+	    	console.log('change D', scope.favPo, scope.currentTeam.team)
+	      scope.render();
+	    });
 	    
 	    scope.render = function() {
 	    	iElement[0].innerHTML = "";
+	    	var poArr = TeamPo[scope.currentTeam.team];
 				plotChart(poArr, iElement,iAttrs);
 			}
 		}
@@ -38,7 +39,7 @@ var plotChart= function(data, ele, domAttr){
 	var height = domAttr.height || 300;
 	var padding = domAttr.padding || 30;
 	var maxY = 20;
-	console.log(domAttr)
+
 	var svg = dimple.newSvg(ele[0], width, height);
 
 	var dataCon = [];
