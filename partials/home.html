@@ -27,9 +27,11 @@
   </div>
 
   <div class="widget-list group">  
-    <div ng-include="'/partials/teamstatus.html'" ng-controller="TeamSttsCtrl" class="widget-container widget-left" width = '400' height = '300'id="test3">
-
-      <a href="#/teamstatus">Full Chart</a>
+  
+    <div height>
+    <div ng-if='show' ng-pochart class="widget-container widget-left" width='500' height='280' padding='10' >
+    <a href="#/teamstatus">Full Chart</a>
+    </div>
     </div>
     <div ng-include="'/partials/teamTopScorers.html'" ng-controller="TeamTopScorersController" class="widget-container widget-right" id="test4">
       Dummy
