@@ -343,4 +343,8 @@ soccerDashControllers.controller("TeamTopScorersController", ["$rootScope", "$sc
   // }
 }]);
 
+soccerDashControllers.controller('ExpandedCtrl', function($scope){
+  // $scope.apply();
+  console.log('expanded');
+});
 
