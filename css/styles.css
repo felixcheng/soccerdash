@@ -403,6 +403,17 @@ nav li a {
   z-index: 100;
 }
 
+.newFavoriteTeam {
+  background-color: darkgrey;
+  color: white;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+/**/
+
 /*line-graph*/
 path {
   stroke: steelblue;

@@ -5,7 +5,7 @@
   <nav>
     <ul ng-model="selected" ng-show="selected" class="animate">
       <li>SoccerDash</li>
-      <li>Welcome {{ user.displayName }}!</li>
+      <li>Welcome <a href="#/profile">{{ user.displayName }}!</a></li>
       <li>Select a Different Team</li>
       <li ng-repeat="team in teams" class="team-inset"><a href='#' ng-click="selectCurrentTeam(team)" data-team="{{ team.teampath }}">{{ team.team }}</a></li>
       <li><a href="" ng-click="hideNav()" class="close">Close Menu</a></li>
