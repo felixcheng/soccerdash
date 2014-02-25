@@ -1,11 +1,13 @@
 /// Directive to plot charts
 soccerDashApp.directive('ngPochart', function(){
+
 	return{
 		restrict: 'EA',
-		template: '<div><div ng-transclude>Position Change </div>',
+		template: '<div><div ng-transclude>Position Chart </div>',
 		transclude: true,
 		controller:  ['$scope', function($scope){
 			$scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
+			console.log('ngPC', $scope.favPo)
 		}],
 
 		link: function(scope, iElement, iAttrs){
@@ -35,6 +37,7 @@ soccerDashApp.directive('ngPochart', function(){
 });
 
 var plotChart= function(data, ele, domAttr){
+	console.log('plotting')
 	var width = domAttr.width || 300;
 	var height = domAttr.height || 300;
 	var padding = domAttr.padding || 30;
@@ -67,7 +70,7 @@ var plotChart= function(data, ele, domAttr){
     x.overrideMax = 30;
     y.overrideMin = 21;
     y.overrideMax = 1;
-s
+
     // Add the bubble series for shift values first so that it is
     // drawn behind the lines
     myChart.addSeries(null, dimple.plot.bubble);
