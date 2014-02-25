@@ -38,6 +38,10 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
     templateUrl: "partials/selectfavoriteteam.html",
     controller: "SelectController"
   })
+  .when('/profile', {
+    templateUrl: "partials/profile.html",
+    controller: "ProfileController"
+  })
   .when('/league', {
     templateUrl: 'partials/leaguetbl.html',
     controller: 'LeagueTblCtrl'

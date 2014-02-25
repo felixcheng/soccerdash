@@ -1,15 +1,15 @@
 var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase', 'ngAnimate']);
  
 soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
-	function($rootScope, $scope){   
-		//Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
+  function($rootScope, $scope){   
+    //Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
     $scope.isFavorite= function(){
       console.log('root', $scope.favorite)
-    	for (var n in $rootScope.league) {
-	    	if ($rootScope[teams][n][team] === $scope.favorite){
-	    		$rootScope.teams.team.favorite = true;
-	    	}
-	    }
+      for (var n in $rootScope.league) {
+       if ($rootScope[teams][n][team] === $scope.favorite){
+          $rootScope.teams.team.favorite = true;
+        }
+      }
     }
     console.log('cu', $scope.currentTeam)
     // $scope.isFavorite();
@@ -23,7 +23,7 @@ soccerDashControllers.controller('IndexController',
     var dataRef = new Firebase('https://soccerdashboard.firebaseio.com/members');
     $scope.members = $firebase(dataRef);
 
-    //Firebase/Github Authentication
+    //Firebase/Twitter Authentication
     $scope.loginObj = $firebaseSimpleLogin(dataRef);
 
     //Listening to login
@@ -61,6 +61,8 @@ soccerDashControllers.controller('IndexController',
           console.log('snapshot.val().favoriteTeam', snapshot.val().favoriteTeam);
           $scope.user.favoriteTeam = snapshot.val().favoriteTeam;
           console.log('favteam', $scope.user.favoriteTeam.team)
+          //The newFavoriteTeam is the variable used when selecting a team in the list
+          $scope.newFavoriteTeam = $scope.user.favoriteTeam;
           //Set the current team as the favorite team
           $scope.currentTeam = snapshot.val().favoriteTeam;
           console.log('$scope.currentTeam.teamshort', $scope.currentTeam.teamshort);
@@ -103,24 +105,28 @@ soccerDashControllers.controller('IndexController',
 
     $scope.hideNav = function(){
       $scope.selected = false;
-    }
+    };
+
+    $scope.selectNewFavoriteTeam = function(team) {
+      console.log('team selected!', team);
+      $scope.newFavoriteTeam = team;
+    };
 
     //Store the favorite team in the user object and in the Firebase member data
-    $scope.selectFavoriteTeam = function(team) {
-      $scope.user.favoriteTeam = team;
-      $scope.members[$scope.user.id].favoriteTeam = team;
+    $scope.saveFavoriteTeam = function() {
+      $scope.user.favoriteTeam = $scope.newFavoriteTeam;
+      $scope.members[$scope.user.id].favoriteTeam = $scope.newFavoriteTeam;
       $scope.members.$save($scope.user.id);
       //Set the current team as the favorite team when logging in the first time and selecting your fav team
-      $scope.currentTeam = team;
+      $scope.currentTeam = $scope.newFavoriteTeam;
       //Get the results of the new current team
-      fetchResult(team);
+      fetchResult($scope.newFavoriteTeam);
       //testing
-      fetchTopScorers(team);
+      fetchTopScorers($scope.newFavoriteTeam);
+      $location.path("/"); //When a user selects the team redirect him to '/'
     };
 
     //Select another current team
-    // $scope.favorite = "Liverpool";
-    // $scope.currTeam = "liverpool";
     $scope.selectCurrentTeam = function(team) {
       $scope.currentTeam = team;
       fetchResult(team);
@@ -191,25 +197,15 @@ soccerDashControllers.controller("SelectController",
 
 }]);
 
-// soccerDashControllers.controller("MiniLeagueCtrl", ["$rootScope", "$scope", 
+soccerDashControllers.controller("ProfileController",
+  ["$scope", function($scope){
 
-// 	function($rootScope, $scope){  
-// 		//Copy the data from 'teams' to 'favoriteTeam' for 
-// 		//the miniLeague Page 
-// 		var teams = $rootScope.league;
-//   	for (var n in teams) {
-//     	if (teams[n].team === $scope.user.favoriteTeam){
-//     		$scope.favoriteTeam = teams[n];
-//     	}
-//   	}
-//     console.log('fav', $scope.favorite, $scope.favoriteTeam) 
-// }]);
+}]);
+
 soccerDashControllers.controller("MiniLeagueCtrl",
   ["$scope", function($scope){
   //The favorite team is now available in the user object
   //The teams detailed info (league) is available in the scope of IndexController
-
-
 }]);
 
 
