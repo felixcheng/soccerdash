@@ -7,6 +7,7 @@ soccerDashApp.directive('ngPochart', function(){
 		transclude: true,
 		controller:  ['$scope', function($scope){
 			$scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
+			console.log('ngPC', $scope.favPo)
 		}],
 
 		link: function(scope, iElement, iAttrs){
@@ -15,28 +16,26 @@ soccerDashApp.directive('ngPochart', function(){
         scope.$apply();
       };
 
-      //Watch for resizing of the browser for re-rendering
 	    scope.$watch(function() {
 	      return angular.element(window)[0].innerWidth;
 	    }, function() {
 	      scope.render();
 	    });
 
-	    //Watch for change of scope for re-rendering
 	    scope.$watch(scope.favPo, function() {
+	    	console.log('change D', scope.favPo, scope.currentTeam.team)
 	      scope.render();
 	    });
 	    
-	    //Trigger the rendering of the position chart
 	    scope.render = function() {
 	    	iElement[0].innerHTML = "";
 	    	var teamPicked = scope.user.favoriteTeam.team;
 	    	var poArr = {};
 		    poArr[teamPicked] = TeamPo[scope.user.favoriteTeam.team];
 
-		    //Add another series to the data variable 
-		    // in case there is a selected team other than the favorite
 	    	if (scope.user.favoriteTeam.team !=scope.currentTeam.team){
+					// plotChart(iElement, iAttrs, poArr);
+	    // 	} else {
 	    		var team2 = scope.currentTeam.team;
 	    		poArr[team2] = TeamPo[scope.currentTeam.team];
 	    	}
@@ -47,9 +46,9 @@ soccerDashApp.directive('ngPochart', function(){
 });
 
 var plotChart= function(ele, domAttr, data){
-	// Set up framework for the svg/chart
 	var args = Array.prototype.slice.call(arguments);
 	var data = args.slice(2);
+	console.log('p data', data.length, data)
 	var width = domAttr.width || 300;
 	var height = domAttr.height || 300;
 	var padding = domAttr.padding || 30;
@@ -57,9 +56,9 @@ var plotChart= function(ele, domAttr, data){
 
 	var svg = dimple.newSvg(ele[0], width, height);
 
-	//Modify the data for the dimple.js
 	var dataCon = [];
 	for (var n in data){
+		console.log('t', data[n]);
 		for (var m in data[n]) {
 			for (var i = 0; i < data[n][m].length; i++) {
 				var temp ={};
@@ -70,8 +69,16 @@ var plotChart= function(ele, domAttr, data){
 			};
 		};
 	};
+	console.log('dataCon', dataCon)
 
-	//Use dimple.js to draw the position chart
+	// data.forEach(function (d, ind) {
+	// 	var temp ={}
+ //    temp["Position"] = d;
+ //    temp["Week"] = ind+1;
+ //    temp["Team"] = 1;
+ //    dataCon.push(temp)
+ //  }, this);
+
     // Create the chart area
     var myChart = new dimple.chart(svg, dataCon);
     // myChart.setBounds(70, 40, 490, 320);
@@ -107,6 +114,36 @@ var plotChart= function(ele, domAttr, data){
     myChart.draw();
 };
 
+/// Directive to open modal
+soccerDashApp.directive('modalDialog', function(){
+	return {
+		restrict: 'EA',
+		scope: { 
+			show: '='
+		},
+		replace: true,
+		transclude: true,
+
+		link: function(scope, iElement, iAttrs){
+ 			scope.dialog ={};
+ 			if (iAttrs.width){
+ 				scope.dialog.width = iAttrs.width;
+ 			}
+ 			if (iAttrs.height){
+ 				scope.dialog.height = iAttrs.height;
+ 			}
+ 			scope.hideModal = function(){
+ 				scope.show = false;
+ 			}
+		},
+
+template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
+
+
+	}
+});
+
+
 // Directive for Bar Charts
 soccerDashApp.directive('ngTopScorers', function($parse) {
 	var directiveDefinitionObject = {
@@ -134,3 +171,4 @@ soccerDashApp.directive('ngTopScorers', function($parse) {
 	};
   return directiveDefinitionObject;
 })
+
