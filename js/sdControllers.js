@@ -158,7 +158,6 @@ soccerDashControllers.controller("MiniLeagueCtrl",
   //The teams detailed info (league) is available in the scope of IndexController
 }]);
 
-//NOW USING WATCH
 // Recent Results (small) Controller
 soccerDashControllers.controller("RecentResult", ["$scope", "statsfcService",
   function($scope, statsfcService) {
@@ -286,7 +285,6 @@ soccerDashControllers.controller('ModalCtrl', function($scope) {
   };
 });
 
-//NOW USING WATCH
 // Team Top Scorers Controller
 soccerDashControllers.controller("TeamTopScorersController", ["$scope", "statsfcService",
   function($scope, statsfcService) {
