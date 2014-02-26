@@ -1,18 +1,10 @@
 var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase', 'ngAnimate']);
  
-soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
-  function($rootScope, $scope){   
-    //Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
-    $scope.isFavorite= function(){
-      for (var n in $rootScope.league) {
-       if ($rootScope.league[n].team === $scope.user.favoriteTeam.team){
-          $rootScope.league[n].favorite = true;
-        }
-      }
-    }
-    $scope.isFavorite();
+soccerDashControllers.controller("LeagueTblCtrl", ["$scope",
+  function($scope){
 
 }]);
+
 
 soccerDashControllers.controller('IndexController',
   ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService', "$rootScope",
@@ -82,9 +74,6 @@ soccerDashControllers.controller('IndexController',
           $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
           $scope.favPo = TeamPo[$scope.currentTeam.team];
 
-          //DAVID
-          // fetchTopScorers($scope.currentTeam);
-          //DAVID
           //When a user already exists, redirect him to the '/''
           $location.path("/");
           $scope.show = true;
