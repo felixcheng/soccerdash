@@ -128,9 +128,9 @@ soccerDashControllers.controller('IndexController',
     //Select another current team
     $scope.selectCurrentTeam = function(team) {
       $scope.currentTeam = team;
-      fetchResult(team);
-      //testing
-      fetchTopScorers(team);
+      // fetchResult(team);
+      // //testing
+      // fetchTopScorers(team);
     };
 
 
