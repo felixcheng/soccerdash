@@ -151,7 +151,7 @@ soccerDashApp.directive('ngTopScorers', function($parse) {
         .classed('player-name', true)
         
         .append('div')
-        .style('width', function(d) { return (96 / maxGoals) * d.goals + '%'})
+        .style('width', function(d) { return (100 / maxGoals) * d.goals + '%'})
         .classed('data-rep', true)
     } 
 	};
