@@ -139,7 +139,7 @@ header ul li:first-child {
   z-index: 100;
 }
 nav ul li {
-  padding: 1.65% 2%;
+  padding: 1.50% 2%;
   border-bottom: 1px solid #60636f;
 }
 nav ul li:first-child {
@@ -319,6 +319,7 @@ nav li a:hover {
   .stats-left,
   .stats-right {
     width: 49%;
+    border: 1px solid blue;
   }
   .stats-left {
     float: left;
@@ -331,6 +332,7 @@ nav li a:hover {
     font-size: 120%;
     margin: 0 auto;
     width: 98%;
+    border: 1px solid red;
   }
   .current-position .position { 
     background-color: #B00000;
@@ -340,9 +342,6 @@ nav li a:hover {
   }
   .league-stats td {
     padding: 5% 3%;
-  }
-  .league-stats tr {
-    width: 90%;
   }
   .league-stats .category {
     width: 50%;
