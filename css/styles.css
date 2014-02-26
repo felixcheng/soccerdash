@@ -170,18 +170,18 @@ nav li a:hover {
 }
 .widget-container {
   min-height: 44vh;
-  width: 35%;
+  width: 40%;
   background-color: #fff;
   opacity: .85;
   position: relative;
 }
 .widget-left {
   float: left;
-  margin-left: 10%;
+  margin-left: 8%;
 }
 .widget-right {
   float: right;
-  margin-right: 10%;
+  margin-right: 8%;
 }
 
 /* Widget Main Styles */ 
@@ -307,10 +307,11 @@ nav li a:hover {
   .chart .data-rep {
     background-color: #782d30;
     margin: 1% 0;
-    height: 10px;
+    height: 9px;
   }
   .team-top-scorers {
-    padding: 1%;
+    margin: 0 auto;
+    width: 96%;
   }
 
   /* Current League Position */
