@@ -4,15 +4,19 @@ soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
   function($rootScope, $scope){   
     //Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
     $scope.isFavorite= function(){
-      console.log('root', $scope.favorite)
+      console.log('scope', $rootScope.league)
       for (var n in $rootScope.league) {
-       if ($rootScope[teams][n][team] === $scope.favorite){
-          $rootScope.teams.team.favorite = true;
+        // debugger
+       if ($rootScope.league[n].team === $scope.user.favoriteTeam.team){
+          $rootScope.league[n].favorite = true;
+          console.log('fav class', $rootScope.league[n])
+
         }
       }
     }
-    console.log('cu', $scope.currentTeam)
-    // $scope.isFavorite();
+    console.log('cu', $scope.currentTeam, 'league', $scope.league)
+    $scope.isFavorite();
+
 }]);
 
 soccerDashControllers.controller('IndexController',
@@ -76,9 +80,9 @@ soccerDashControllers.controller('IndexController',
           fetchTopScorers($scope.currentTeam);
           //When a user already exists, redirect him to the '/''
           $location.path("/");
+        $scope.show = true;
 
         }
-        $scope.show = true;
         //$scope.$broadcast('loaded', $scope.currentTeam)
       });
 
@@ -204,6 +208,7 @@ soccerDashControllers.controller("ProfileController",
 
 soccerDashControllers.controller("MiniLeagueCtrl",
   ["$scope", function($scope){
+    $scope.show = true;
   //The favorite team is now available in the user object
   //The teams detailed info (league) is available in the scope of IndexController
 }]);

@@ -13,6 +13,7 @@ soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcS
   statsfcService.getLeague('premier-league', '2013/2014' )
   .then(function(data) {
     $rootScope.league = data;
+    console.log('root league', $rootScope.league)
   });
 
   // statsfcService.getTeamTopScorers('liverpool')
