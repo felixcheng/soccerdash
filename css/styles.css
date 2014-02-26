@@ -166,10 +166,10 @@ nav li a:hover {
 .widget-list {
   width: 100%;
   height: 100%;
-  margin-bottom: 2%;
+  margin: 1% 0;
 }
 .widget-container {
-  min-height: 42vh;
+  min-height: 44vh;
   width: 35%;
   background-color: #fff;
   opacity: .85;
