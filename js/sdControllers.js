@@ -4,17 +4,12 @@ soccerDashControllers.controller("LeagueTblCtrl", ["$rootScope", "$scope",
   function($rootScope, $scope){   
     //Give a class 'favorite' to the favorite team's data, enabling highlighting @ view
     $scope.isFavorite= function(){
-      console.log('scope', $rootScope.league)
       for (var n in $rootScope.league) {
-        // debugger
        if ($rootScope.league[n].team === $scope.user.favoriteTeam.team){
           $rootScope.league[n].favorite = true;
-          console.log('fav class', $rootScope.league[n])
-
         }
       }
     }
-    console.log('cu', $scope.currentTeam, 'league', $scope.league)
     $scope.isFavorite();
 
 }]);
@@ -71,6 +66,19 @@ soccerDashControllers.controller('IndexController',
           $scope.currentTeam = snapshot.val().favoriteTeam;
           console.log('$scope.currentTeam.teamshort', $scope.currentTeam.teamshort);
 
+          // $scope.position = $scope.currentTeam.position;
+          // console.log('yes 3')
+
+          if ($scope.currentTeam.position == 1){
+            $scope.currentTeam.position = $scope.currentTeam.position + "st"
+          } else if ($scope.currentTeam.position == 2){
+            $scope.currentTeam.position = $scope.currentTeam.position + "nd"
+          } else if ($scope.currentTeam.position == 3){
+            $scope.currentTeam.position = $scope.currentTeam.position + "rd"
+          } else {
+            $scope.currentTeam.position = $scope.currentTeam.position + "th"       
+          }
+
           $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
           $scope.favPo = TeamPo[$scope.currentTeam.team];
 
@@ -79,7 +87,8 @@ soccerDashControllers.controller('IndexController',
           //DAVID
           //When a user already exists, redirect him to the '/''
           $location.path("/");
-        $scope.show = true;
+          $scope.show = true;
+
 
         }
         //$scope.$broadcast('loaded', $scope.currentTeam)
@@ -128,6 +137,52 @@ soccerDashControllers.controller('IndexController',
     //Select another current team
     $scope.selectCurrentTeam = function(team) {
       $scope.currentTeam = team;
+
+      if ($scope.currentTeam.position == 1){
+        $scope.currentTeam.position = $scope.currentTeam.position + "st"
+      } else if ($scope.currentTeam.position == 2){
+        $scope.currentTeam.position = $scope.currentTeam.position + "nd"
+      } else if ($scope.currentTeam.position == 3){
+        $scope.currentTeam.position = $scope.currentTeam.position + "rd"
+      } else {
+        $scope.currentTeam.position = $scope.currentTeam.position + "th"       
+      }
+      fetchResult(team);
+      //testing
+      fetchTopScorers(team);
+    };
+
+    //Moved from the controller 'RecentResult'
+    var fetchResult = function(team) {
+      statsfcService.getResult(team.teampath) //needs to be teampath
+      .then(function(data) {
+        $scope.resultData = [];  
+
+        for(var i = 0; i < data.length; i++) {
+          if(data[i]['status'] === 'Finished') {
+            $scope.resultData.push(data[i]);     
+          }
+        }  
+
+        $scope.date = statsfcService.formatDate($scope.resultData[0].dateiso);
+        
+        $scope.homeTeam = $scope.resultData[0].home; 
+        $scope.awayTeam = $scope.resultData[0].away; 
+        
+        $scope.homeScore = $scope.resultData[0].fulltime[0];
+        $scope.awayScore = $scope.resultData[0].fulltime[1];
+
+        $scope.homeGoals = [];
+        $scope.awayGoals = [];
+
+        for(var i = 0; i < $scope.resultData[0]['incidents'].length; i++) {
+          if($scope.homeTeam === $scope.resultData[0]['incidents'][i]['team']) {
+            $scope.homeGoals.push($scope.resultData[0]['incidents'][i]);
+          }else {
+            $scope.awayGoals.push($scope.resultData[0]['incidents'][i]);
+          }
+        }
+      });
     };
 
 
@@ -307,7 +362,17 @@ soccerDashControllers.controller("TeamTopScorersController", ["$rootScope", "$sc
 }]);
 
 soccerDashControllers.controller('ExpandedCtrl', function($scope){
-  // $scope.apply();
-  console.log('expanded');
+
 });
 
+// var changeOrdinal = function(){
+//       if ($scope.currentTeam.position == 1){
+//         $scope.currentTeam.position = $scope.currentTeam.position + "st"
+//       } else if ($scope.currentTeam.position == 2){
+//         $scope.currentTeam.position = $scope.currentTeam.position + "nd"
+//       } else if ($scope.currentTeam.position == 3){
+//         $scope.currentTeam.position = $scope.currentTeam.position + "rd"
+//       } else {
+//         $scope.currentTeam.position = $scope.currentTeam.position + "th"       
+//       }  
+// }

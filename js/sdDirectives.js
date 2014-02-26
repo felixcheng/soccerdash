@@ -15,25 +15,28 @@ soccerDashApp.directive('ngPochart', function(){
         scope.$apply();
       };
 
+      //Watch for resizing of the browser for re-rendering
 	    scope.$watch(function() {
 	      return angular.element(window)[0].innerWidth;
 	    }, function() {
 	      scope.render();
 	    });
 
+	    //Watch for change of scope for re-rendering
 	    scope.$watch(scope.favPo, function() {
 	      scope.render();
 	    });
 	    
+	    //Trigger the rendering of the position chart
 	    scope.render = function() {
 	    	iElement[0].innerHTML = "";
 	    	var teamPicked = scope.user.favoriteTeam.team;
 	    	var poArr = {};
 		    poArr[teamPicked] = TeamPo[scope.user.favoriteTeam.team];
 
+		    //Add another series to the data variable 
+		    // in case there is a selected team other than the favorite
 	    	if (scope.user.favoriteTeam.team !=scope.currentTeam.team){
-					// plotChart(iElement, iAttrs, poArr);
-	    // 	} else {
 	    		var team2 = scope.currentTeam.team;
 	    		poArr[team2] = TeamPo[scope.currentTeam.team];
 	    	}
@@ -44,6 +47,7 @@ soccerDashApp.directive('ngPochart', function(){
 });
 
 var plotChart= function(ele, domAttr, data){
+	// Set up framework for the svg/chart
 	var args = Array.prototype.slice.call(arguments);
 	var data = args.slice(2);
 	var width = domAttr.width || 300;
@@ -53,6 +57,7 @@ var plotChart= function(ele, domAttr, data){
 
 	var svg = dimple.newSvg(ele[0], width, height);
 
+	//Modify the data for the dimple.js
 	var dataCon = [];
 	for (var n in data){
 		for (var m in data[n]) {
@@ -66,6 +71,7 @@ var plotChart= function(ele, domAttr, data){
 		};
 	};
 
+	//Use dimple.js to draw the position chart
     // Create the chart area
     var myChart = new dimple.chart(svg, dataCon);
     // myChart.setBounds(70, 40, 490, 320);
@@ -101,35 +107,6 @@ var plotChart= function(ele, domAttr, data){
     myChart.draw();
 };
 
-/// Directive to open modal
-soccerDashApp.directive('modalDialog', function(){
-	return {
-		restrict: 'EA',
-		scope: { 
-			show: '='
-		},
-		replace: true,
-		transclude: true,
-
-		link: function(scope, iElement, iAttrs){
- 			scope.dialog ={};
- 			if (iAttrs.width){
- 				scope.dialog.width = iAttrs.width;
- 			}
- 			if (iAttrs.height){
- 				scope.dialog.height = iAttrs.height;
- 			}
- 			scope.hideModal = function(){
- 				scope.show = false;
- 			}
-		},
-
-template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
-
-	}
-});
-
-
 // Directive for Bar Charts
 soccerDashApp.directive('ngTopScorers', function($parse) {
 	var directiveDefinitionObject = {
@@ -157,35 +134,3 @@ soccerDashApp.directive('ngTopScorers', function($parse) {
 	};
   return directiveDefinitionObject;
 })
-
-/// Directive to change numbers to ordinal
-soccerDashApp.directive('ngOrdinal', function(){
-	return{
-		restrict: 'EA',
-
-		scope: { 
-			show: '='
-		},
-		template: '<h4 ng-if="show">Current A Position: {{position}} </h4>', 
-		transclude: true,
-		controller:  ['$scope', function($scope){
-			console.log('or scope', $scope.currentTeam)
-			var position = $scope.currentTeam.position;
-
-			if (position == 1){
-				position = position + " st"
-			} else if (position == 2){
-				position = position + " nd"
-			} else if (position == 3){
-				position = position + " rd"
-			} else {
-				position = position + " th"				
-			}
-			$scope.position=position;
-			console.log('posi', $scope.position);
-		}],
-
-		
-	}
-	
-});

@@ -39,6 +39,7 @@ var dateRange={0:"2013-08-17 00:00:00",
 							25:"2014-02-09 00:00:00",
 							26:"2014-02-16 00:00:00",
 							27:"2014-02-23 00:00:00",
+							28:"2014-03-02 00:00:00",
 						};
 
 var teams=['Arsenal',
@@ -94,7 +95,7 @@ for (var n = 0; n < extract.length; n++){
 };
 
 for (var n in result){
-	for (var i = 1; i < 27; i++) {
+	for (var i = 1; i < 29; i++) {
 		result[n][i]+=result[n][i-1];
 	};
 }
