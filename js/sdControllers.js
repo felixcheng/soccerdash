@@ -68,7 +68,6 @@ soccerDashControllers.controller('IndexController',
           //When a user already exists, redirect him to the '/''
           $location.path("/");
           $scope.show = true;
-
         }
         //$scope.$broadcast('loaded', $scope.currentTeam)
       });
@@ -119,44 +118,16 @@ soccerDashControllers.controller('IndexController',
 
       changeOrdinal($scope);
 
-      fetchResult(team);
-      //testing
-      fetchTopScorers(team);
+      if ($scope.currentTeam.position == 1){
+        $scope.currentTeam.position = $scope.currentTeam.position + "st"
+      } else if ($scope.currentTeam.position == 2){
+        $scope.currentTeam.position = $scope.currentTeam.position + "nd"
+      } else if ($scope.currentTeam.position == 3){
+        $scope.currentTeam.position = $scope.currentTeam.position + "rd"
+      } else {
+        $scope.currentTeam.position = $scope.currentTeam.position + "th"       
+      }
     };
-
-    //Moved from the controller 'RecentResult'
-    var fetchResult = function(team) {
-      statsfcService.getResult(team.teampath) //needs to be teampath
-      .then(function(data) {
-        $scope.resultData = [];  
-
-        for(var i = 0; i < data.length; i++) {
-          if(data[i]['status'] === 'Finished') {
-            $scope.resultData.push(data[i]);     
-          }
-        }  
-
-        $scope.date = statsfcService.formatDate($scope.resultData[0].dateiso);
-        
-        $scope.homeTeam = $scope.resultData[0].home; 
-        $scope.awayTeam = $scope.resultData[0].away; 
-        
-        $scope.homeScore = $scope.resultData[0].fulltime[0];
-        $scope.awayScore = $scope.resultData[0].fulltime[1];
-
-        $scope.homeGoals = [];
-        $scope.awayGoals = [];
-
-        for(var i = 0; i < $scope.resultData[0]['incidents'].length; i++) {
-          if($scope.homeTeam === $scope.resultData[0]['incidents'][i]['team']) {
-            $scope.homeGoals.push($scope.resultData[0]['incidents'][i]);
-          }else {
-            $scope.awayGoals.push($scope.resultData[0]['incidents'][i]);
-          }
-        }
-      });
-    };
-
 
 }]);
 
@@ -187,35 +158,39 @@ soccerDashControllers.controller("MiniLeagueCtrl",
   //The teams detailed info (league) is available in the scope of IndexController
 }]);
 
-
+//NOW USING WATCH
 // Recent Results (small) Controller
 soccerDashControllers.controller("RecentResult", ["$scope", "statsfcService",
   function($scope, statsfcService) {
 
   $scope.$watch('currentTeam', function(newVal, oldVal, scope) {
-    statsfcService.getResult(newVal.teampath)
-    .then(function(data) {
-      $scope.resultData = data;
 
-      $scope.date = statsfcService.formatDate(data[0].dateiso);
-      
-      $scope.homeTeam = data[0].home; 
-      $scope.awayTeam = data[0].away; 
-      
-      $scope.homeScore = data[0].fulltime[0];
-      $scope.awayScore = data[0].fulltime[1];
+    if(newVal) {
+      statsfcService.getResult(newVal.teampath)
+      .then(function(data) {
+        $scope.resultData = data;
 
-      $scope.homeGoals = [];
-      $scope.awayGoals = [];
+        $scope.date = statsfcService.formatDate(data[0].dateiso);
+        
+        $scope.homeTeam = data[0].home; 
+        $scope.awayTeam = data[0].away; 
+        
+        $scope.homeScore = data[0].fulltime[0];
+        $scope.awayScore = data[0].fulltime[1];
 
-      for(var i = 0; i < data[0]['incidents'].length; i++) {
-        if($scope.homeTeam === data[0]['incidents'][i]['team']) {
-          $scope.homeGoals.push(data[0]['incidents'][i]);
-        }else {
-          $scope.awayGoals.push(data[0]['incidents'][i]);
+        $scope.homeGoals = [];
+        $scope.awayGoals = [];
+
+        for(var i = 0; i < data[0]['incidents'].length; i++) {
+          if($scope.homeTeam === data[0]['incidents'][i]['team']) {
+            $scope.homeGoals.push(data[0]['incidents'][i]);
+          }else {
+            $scope.awayGoals.push(data[0]['incidents'][i]);
+          }
         }
-      }
-    });
+      });
+    }
+
   });
 
 }]);
@@ -311,24 +286,24 @@ soccerDashControllers.controller('ModalCtrl', function($scope) {
   };
 });
 
+//NOW USING WATCH
 // Team Top Scorers Controller
-soccerDashControllers.controller("TeamTopScorersController", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
-  //Ben: strangely enough, it works when the code below is commented out;
-  // $scope.goalData = [];
-  // for(var i = 0; i < 8; i++) { // this appears to stop the widget container from appearing - refactor in drective? 
-  //   $scope.goalData.push($rootScope.goalData[i])
-  // }
+soccerDashControllers.controller("TeamTopScorersController", ["$scope", "statsfcService",
+  function($scope, statsfcService) {
+
   $scope.$watch('currentTeam', function(newVal, oldVal, scope) {
-    $scope.showGoal = false;
-      
-    statsfcService.getTeamTopScorers(newVal.teampath)
-    .then(function(data) {
-      $scope.goalData = [];
-      for(var i = 0; i < 8; i++) { 
-        $scope.goalData.push(data[i]);
-      }
-      $scope.showGoal = true;
-    });
+    if(newVal) {
+      $scope.showGoal = false;
+        
+      statsfcService.getTeamTopScorers(newVal.teampath)
+      .then(function(data) {
+        $scope.goalData = [];
+        for(var i = 0; i < 8; i++) { 
+          $scope.goalData.push(data[i]);
+        }
+        $scope.showGoal = true;
+      });
+    }
   });
 
 }]);
