@@ -1,6 +1,5 @@
 var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase', 'ngAnimate']);
  
-<<<<<<< HEAD
 soccerDashControllers.controller("LeagueTblCtrl", ["$scope",
   function($scope){
 
