@@ -153,9 +153,7 @@ soccerDashControllers.controller("ProfileController",
 
 soccerDashControllers.controller("MiniLeagueCtrl",
   ["$scope", function($scope){
-    $scope.show = true;
-  //The favorite team is now available in the user object
-  //The teams detailed info (league) is available in the scope of IndexController
+
 }]);
 
 // Recent Results (small) Controller
@@ -311,13 +309,15 @@ soccerDashControllers.controller('ExpandedCtrl', function($scope){
 });
 
 var changeOrdinal = function(scope){
-  if (scope.currentTeam.position == 1){
-    scope.currentTeam.position = scope.currentTeam.position + "st";
-  } else if (scope.currentTeam.position == 2){
-    scope.currentTeam.position = scope.currentTeam.position + "nd";
-  } else if (scope.currentTeam.position == 3){
-    scope.currentTeam.position = scope.currentTeam.position + "rd";
-  } else {
-    scope.currentTeam.position = scope.currentTeam.position + "th";      
-  }  
+  if (typeof scope.currentTeam.position ===  'number'){
+    if (scope.currentTeam.position == 1){
+      scope.currentTeam.position = scope.currentTeam.position + "st";
+    } else if (scope.currentTeam.position == 2){
+      scope.currentTeam.position = scope.currentTeam.position + "nd";
+    } else if (scope.currentTeam.position == 3){
+      scope.currentTeam.position = scope.currentTeam.position + "rd";
+    } else {
+      scope.currentTeam.position = scope.currentTeam.position + "th";      
+    }      
+  }
 }
