@@ -190,6 +190,7 @@ nav li a:hover {
   font-size: 150%;
   text-align: center;
   margin: 1.5% 0;
+  color: #3c4651;
 }
 .widget-container h4 {
   font-size: 150%;
@@ -305,7 +306,7 @@ nav li a:hover {
 
   /* Team Top Scorers */
   .chart .data-rep {
-    background-color: #782d30;
+    background-color: #B00000;
     margin: 1% 0;
     height: 9px;
   }
@@ -326,18 +327,24 @@ nav li a:hover {
     float: right;
   }
   .stats-left table,
-  .stats-right table {   
+  .stats-right table {  
     font-size: 120%;
-    margin: 0 5%;
+    margin: 0 auto;
     width: 98%;
   }
-  .current-position td {
-    padding: 8% 3%;
+  .current-position .position { 
+    background-color: #B00000;
+    margin: 2% 0;
+    padding: 3%;
+    color: #fff;
   }
-  .current-position tr {
-    width: 100%;
+  .league-stats td {
+    padding: 5% 3%;
   }
-  .current-position .category {
+  .league-stats tr {
+    width: 90%;
+  }
+  .league-stats .category {
     width: 50%;
     text-align: left;
   }
