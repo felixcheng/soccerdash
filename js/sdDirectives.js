@@ -7,7 +7,6 @@ soccerDashApp.directive('ngPochart', function(){
 		transclude: true,
 		controller:  ['$scope', function($scope){
 			$scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
-			console.log('ngPC', $scope.favPo)
 		}],
 
 		link: function(scope, iElement, iAttrs){
@@ -23,7 +22,6 @@ soccerDashApp.directive('ngPochart', function(){
 	    });
 
 	    scope.$watch(scope.favPo, function() {
-	    	console.log('change D', scope.favPo, scope.currentTeam.team)
 	      scope.render();
 	    });
 	    
@@ -48,7 +46,6 @@ soccerDashApp.directive('ngPochart', function(){
 var plotChart= function(ele, domAttr, data){
 	var args = Array.prototype.slice.call(arguments);
 	var data = args.slice(2);
-	console.log('p data', data.length, data)
 	var width = domAttr.width || 300;
 	var height = domAttr.height || 300;
 	var padding = domAttr.padding || 30;
@@ -58,7 +55,6 @@ var plotChart= function(ele, domAttr, data){
 
 	var dataCon = [];
 	for (var n in data){
-		console.log('t', data[n]);
 		for (var m in data[n]) {
 			for (var i = 0; i < data[n][m].length; i++) {
 				var temp ={};
@@ -69,15 +65,6 @@ var plotChart= function(ele, domAttr, data){
 			};
 		};
 	};
-	console.log('dataCon', dataCon)
-
-	// data.forEach(function (d, ind) {
-	// 	var temp ={}
- //    temp["Position"] = d;
- //    temp["Week"] = ind+1;
- //    temp["Team"] = 1;
- //    dataCon.push(temp)
- //  }, this);
 
     // Create the chart area
     var myChart = new dimple.chart(svg, dataCon);
@@ -139,7 +126,6 @@ soccerDashApp.directive('modalDialog', function(){
 
 template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
 
-
 	}
 });
 
@@ -172,3 +158,34 @@ soccerDashApp.directive('ngTopScorers', function($parse) {
   return directiveDefinitionObject;
 })
 
+/// Directive to change numbers to ordinal
+soccerDashApp.directive('ngOrdinal', function(){
+	return{
+		restrict: 'EA',
+
+		scope: { 
+			show: '='
+		},
+		template: '<h4 ng-if="show">Current A Position: {{position}} </h4>', 
+		transclude: true,
+		controller:  ['$scope', function($scope){
+			console.log('or scope', $scope.currentTeam)
+			var position = $scope.currentTeam.position;
+
+			if (position == 1){
+				position = position + " st"
+			} else if (position == 2){
+				position = position + " nd"
+			} else if (position == 3){
+				position = position + " rd"
+			} else {
+				position = position + " th"				
+			}
+			$scope.position=position;
+			console.log('posi', $scope.position);
+		}],
+
+		
+	}
+	
+});

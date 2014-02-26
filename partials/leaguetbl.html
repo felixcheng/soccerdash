@@ -19,7 +19,7 @@
   				</tr>
   			</thead>
   			<tbody>
-  				<tr ng-repeat="team in league" class="league-content" ng-class="{true: 'favorite'}[isFavorite]">
+  				<tr ng-repeat="team in league" class="league-content" ng-class="{'favorite': team.favorite }">
   				<td> {{team.position}} </td>
   				<td class="team-name"> {{team.team}} </td>
   				<td> {{team.played}} </td>
