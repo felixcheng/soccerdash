@@ -205,7 +205,6 @@ nav li a:hover {
     width: 98%;
     margin: 1% auto;
     box-sizing: border-box;
-    border-radius: 12px;
     position: relative;
     background-color: #fff;
     opacity: .85;
@@ -319,7 +318,6 @@ nav li a:hover {
   .stats-left,
   .stats-right {
     width: 49%;
-    border: 1px solid blue;
   }
   .stats-left {
     float: left;
@@ -332,7 +330,6 @@ nav li a:hover {
     font-size: 120%;
     margin: 0 auto;
     width: 98%;
-    border: 1px solid red;
   }
   .current-position .position { 
     background-color: #B00000;
