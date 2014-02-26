@@ -122,12 +122,6 @@ soccerDashControllers.controller('IndexController',
       $scope.members.$save($scope.user.id);
       //Set the current team as the favorite team when logging in the first time and selecting your fav team
       $scope.currentTeam = $scope.newFavoriteTeam;
-      //Get the results of the new current team
-      //DAVID
-      // fetchResult($scope.newFavoriteTeam);
-      //DAVID
-      //testing
-      // fetchTopScorers($scope.newFavoriteTeam);
       $location.path("/"); //When a user selects the team redirect him to '/'
     };
 
@@ -139,51 +133,6 @@ soccerDashControllers.controller('IndexController',
       fetchTopScorers(team);
     };
 
-    //Moved from the controller 'RecentResult'
-    // var fetchResult = function(team) {
-    //   statsfcService.getResult(team.teampath) //needs to be teampath
-    //   .then(function(data) {
-    //     $scope.resultData = [];  
-
-    //     for(var i = 0; i < data.length; i++) {
-    //       if(data[i]['status'] === 'Finished') {
-    //         $scope.resultData.push(data[i]);     
-    //       }
-    //     }  
-
-    //     $scope.date = statsfcService.formatDate($scope.resultData[0].dateiso);
-        
-    //     $scope.homeTeam = $scope.resultData[0].home; 
-    //     $scope.awayTeam = $scope.resultData[0].away; 
-        
-    //     $scope.homeScore = $scope.resultData[0].fulltime[0];
-    //     $scope.awayScore = $scope.resultData[0].fulltime[1];
-
-    //     $scope.homeGoals = [];
-    //     $scope.awayGoals = [];
-
-    //     for(var i = 0; i < $scope.resultData[0]['incidents'].length; i++) {
-    //       if($scope.homeTeam === $scope.resultData[0]['incidents'][i]['team']) {
-    //         $scope.homeGoals.push($scope.resultData[0]['incidents'][i]);
-    //       }else {
-    //         $scope.awayGoals.push($scope.resultData[0]['incidents'][i]);
-    //       }
-    //     }
-    //   });
-    // };
-
-    // var fetchTopScorers = function(team) {
-    //   $scope.showGoal = false;
-      
-    //   statsfcService.getTeamTopScorers(team.teampath)
-    //   .then(function(data) {
-    //     $scope.goalData = [];
-    //     for(var i = 0; i < 8; i++) { 
-    //       $scope.goalData.push(data[i]);
-    //     }
-    //     $scope.showGoal = true;
-    //   });
-    // };
 
 }]);
 
