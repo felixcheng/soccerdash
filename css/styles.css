@@ -149,27 +149,32 @@ header ul li:first-child {
   left: -31%;
   z-index: 100;
 }
-nav ul li {
+nav ul li,
+.popupTeamSelect ul li {
   padding: 1.50% 2%;
   border-bottom: 1px solid #60636f;
 }
-nav ul li:first-child {
+nav ul li:first-child,
+.popupTeamSelect ul li:first-child {
   border-top: 1px solid #60636f;
 }
-nav li a {
+nav li a,
+.popupTeamSelect li a {
   color: #cf3434;
   text-decoration: none;
   display: inline-block;
   width: 100%;
 }
-nav li a:hover {
+nav li a:hover,
+.popupTeamSelect ul li a:hover {
   color: #F53D3D ;
 }
 .team-inset {
   padding-left: 7.5%;
 }
 .close,
-.logout {
+.logout,
+.popupTeamSelect .save {
   color: #fff;
 }
 
@@ -390,25 +395,29 @@ nav li a:hover {
   }
 
 
-
-/*David*/
+/* Change Favourite Team menu */
 .popupTeamSelect {
-  border: 1px darkgrey solid;
-  background-color: white;
-  color: black;
-  position: fixed;
-  top: 30%;
-  left: 30%;
+  margin: 0 auto;
   width: 40%;
-  height: 40%;
+  height: 99vh;
   z-index: 100;
+  color: #fff;
+  background-color: #3c4651;
+  position: relative;  
 }
-
+.popupTeamSelect button {
+  font-size: 80%;
+  position: absolute;
+  right: 2%;
+  text-decoration: none;
+  color: #fff;
+  background-color: #B00000;
+  border: none;
+}
 .newFavoriteTeam {
   background-color: darkgrey;
   color: white;
 }
-
 .pointer {
   cursor: pointer;
 }
