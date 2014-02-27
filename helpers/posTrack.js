@@ -10,7 +10,7 @@ for (var i = 0; i < data.length; i++){ //data.length
 	extract.push(short);
 }
 
-// need to fill it with num:date
+// update the object with progress of the game num:date
 var dateRange={0:"2013-08-17 00:00:00",
 							1:"2013-08-25 00:00:00",
 							2:"2013-09-01 00:00:00",
