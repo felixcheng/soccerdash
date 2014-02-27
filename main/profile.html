@@ -3,11 +3,10 @@
   <ul>
     <li>{{ user.displayName }}, please pick a team!</li>
       <li ng-repeat="team in teams" ng-class="{newFavoriteTeam: (team.teampath === newFavoriteTeam.teampath)}">
-        <a data-team="{{ team.teampath }}" ng-click="selectNewFavoriteTeam(team)" class="pointer team-inset">
+        <a data-team="{{ team.teampath }}" ng-click="selectNewFavoriteTeam(team)" class="pointer">
           {{ team.team }}
         </a>
     </li>
-    <li><a href="" ng-click="saveFavoriteTeam()" class="save">Save</a></li>
   </ul>
-  <!-- <button ng-click="saveFavoriteTeam()" class="button-left">Save</button> -->
+  <button ng-click="saveFavoriteTeam()">Save</button>
 </div>
