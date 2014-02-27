@@ -48,7 +48,6 @@ soccerDashServices.service('statsfcService',
 
     //Retrieve most recent result
     var getResult = function(teamName) {
-     //David: I added missing // in the url
      var url = 'https://api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&team=' + teamName + '&limit=5&callback=JSON_CALLBACK';
      var config = {
       cache: true
@@ -69,7 +68,6 @@ soccerDashServices.service('statsfcService',
 
     //Retrieve specific team results
     var getTeamResults = function(teamName) {
-     //David: I added missing // in the url
      var url = 'https://api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&team=' + teamName + '&year=2013/2014&callback=JSON_CALLBACK';
 
      var config = {
@@ -112,7 +110,6 @@ soccerDashServices.service('statsfcService',
 
     //Retrieve Team Top Scorers
     var getTeamTopScorers = function(teamName) {
-     //David - I replaced http by https
      var url = 'https://api.statsfc.com/top-scorers.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k&competition=premier-league&team=' + teamName + '&year=2013/2014&callback=JSON_CALLBACK';
 
      var config = {
@@ -131,36 +128,6 @@ soccerDashServices.service('statsfcService',
 
      return d.promise;
     };
-
-
-
-    //Format the ISO dates received by the API
-    var formatDate = function(isoString) {
-      var date = new Date(isoString);
-
-      var months = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-      var days = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
-                      
-      var dayNum = function(day) {
-        var append; 
-        if(day == 1 || day === 21 || day === 31) {
-          append = 'st';
-        }
-        else if(day === 2 || day === 22) {
-          append = 'nd';
-        }
-        else if(day === 3 || day === 23) {
-          append = 'rd';
-        }
-        else {
-          append = 'th';
-        }
-        return day+append;
-      }
-
-      return days[date.getDay()] + " " + dayNum(date.getDate()) + " " + months[date.getMonth()]; 
-    };
       
     return {
       getTeams: getTeams,
@@ -169,7 +136,6 @@ soccerDashServices.service('statsfcService',
       getTeamResults: getTeamResults,
       getLeagueResults: getLeagueResults,
       getTeamTopScorers: getTeamTopScorers,
-      formatDate: formatDate
     }
 
 }]);
