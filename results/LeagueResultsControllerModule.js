@@ -16,7 +16,7 @@ angular.module('leagueResultsControllerModule', ['soccerDashServices'])
     }
 
     for(var i = 0; i < $scope.resultsData.length; i++) {
-      $scope.resultsData[i].dateiso = statsfcService.formatDate($scope.resultsData[i].dateiso); // change dates using helper function
+      $scope.resultsData[i].dateiso = formatDate($scope.resultsData[i].dateiso); // change dates using helper function
     }
 
     $scope.allResults = [];
