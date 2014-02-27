@@ -1,6 +1,7 @@
 //Main app
 var soccerDashApp = angular.module('soccerDashApp', 
-  ['ngRoute', 'ngResource', 'soccerDashControllers', 'soccerDashServices', 'firebase', 'indexControllerModule']);
+  ['ngRoute', 'ngResource', 'soccerDashControllers', 'soccerDashServices', 'firebase', 'indexControllerModule',
+  'leagueResultsControllerModule', 'recentResultControllerModule', 'teamResultsControllerModule']);
 
 //Routes configuration
 soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
@@ -26,7 +27,7 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
     controller: 'LeagueTblCtrl'
   })
   .when('/teamresults', {
-    templateUrl: '../partials/teamresults.html',
+    templateUrl: 'results/teamresults.html',
     controller: 'TeamResultsController'
   })
   .when('/teamstatus', {
@@ -38,7 +39,7 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
     controller: 'ModalCtrl'
   })
   .when('/leagueresults', {
-    templateUrl: '../partials/leagueresults.html',
+    templateUrl: 'results/leagueresults.html',
     controller: 'LeagueResultsController'
   })
 
