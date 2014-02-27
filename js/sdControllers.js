@@ -11,17 +11,18 @@ soccerDashControllers.controller('IndexController',
     //Firebase/Twitter Authentication
     $scope.loginObj = $firebaseSimpleLogin(dataRef);
 
+    $scope.showLoader = true; //Start the loader in every widget
+
     //Listening to login
     $scope.$on("$firebaseSimpleLogin:login", function(evt, user) {
 
       console.log("User " + user.id + " successfully logged in!");
 
-      $scope.showLoader = true;
       //Load the teams detailed data when user has logged in
       statsfcService.getLeague('premier-league','2013/2014')
       .then(function(data) {
         $scope.teams = data;
-        $scope.showLoader = false;
+        $scope.showLoader = false; //Stop the loader in every widget
       });
 
       //Add current user to the scope
