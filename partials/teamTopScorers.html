@@ -1,2 +1,3 @@
 <h3>Top Scorers</h3>
-<div ng-if='showGoal' ng-Top-Scorers chart-data="goalData" class="team-top-scorers"></div>
+<div ng-show="!showGoal" class="ajax-loader"><img src="images/ajax-loader.gif"></div>
+<div ng-if="showGoal" ng-Top-Scorers chart-data="goalData" class="team-top-scorers"></div>

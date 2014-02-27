@@ -1,10 +1,10 @@
 
 <div class="current-position inner-widget-container">  
 
+  <div ng-show='showLoader' class="ajax-loader"><img src="images/ajax-loader.gif"></div>
   <h3 >Current League Position</h3> 
   <h3>{{currentTeam.position}}</h3>
-  <div class="current-position" ng-if="show">
-
+  <div ng-if="!showLoader" class="current-position" ng-if="show">
     <div ng-if="show" class="stats-left">
       <table>
         <tr>

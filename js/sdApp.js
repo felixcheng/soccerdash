@@ -2,25 +2,7 @@
 var soccerDashApp = angular.module('soccerDashApp', 
   ['ngRoute', 'ngResource', 'soccerDashControllers', 'soccerDashServices', 'firebase']);
 
-soccerDashApp.run(['$rootScope', 'statsfcService', function($rootScope, statsfcService) {
-
-  // statsfcService.getTeams('premier-league', '2013/2014' )
-  // .then(function(data) {
-  //   var teams = data;
-  //   $rootScope.teams = teams;
-  // });
-
-  statsfcService.getLeague('premier-league', '2013/2014' )
-  .then(function(data) {
-    $rootScope.league = data;
-    console.log('root league', $rootScope.league)
-  });
-
-  // statsfcService.getTeamTopScorers('liverpool')
-  // .then(function(data) {
-  //   $rootScope.goalData = data;
-  //   $rootScope.showGoal = true;
-  // });  
+soccerDashApp.run(['$rootScope', function($rootScope) {
 
 }]);
 

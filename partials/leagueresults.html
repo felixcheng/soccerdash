@@ -2,7 +2,8 @@
   <div class="expanded-widget-container">
     <h2 ng-controller="LeagueResultsController">Full League Results</h2>
     <a href="#/" class="back">Back</a>
-    <div ng-repeat="result in allResults" class="league-result-container group">
+    <div ng-show='!showLeagueResults' class="ajax-loader"><img src="images/ajax-loader.gif"></div>
+    <div ng-show='showLeagueResults' ng-repeat="result in allResults" class="league-result-container group">
       <h3>{{ result.date }}</h3>
       <div ng-repeat="match in result.matches" class="results">
         <div class="home-result">

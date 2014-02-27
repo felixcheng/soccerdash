@@ -2,7 +2,8 @@
   <div class="expanded-widget-container">
     <h2 ng-controller="TeamResultsController">Full Team Results</h2>
     <a href="#/" class="back">Back</a>
-    <div ng-repeat="result in resultData" class="team-result-container group">
+    <div ng-show='!showTeamResults' class="ajax-loader"><img src="images/ajax-loader.gif"></div>
+    <div ng-show='showTeamResults' ng-repeat="result in resultData" class="team-result-container group">
       <h3>{{ result.dateiso }}</h3>
       <div class="results">
         <div class="home-result">
