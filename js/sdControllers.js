@@ -1,10 +1,4 @@
 var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDashServices', 'firebase', 'ngAnimate']);
- 
-soccerDashControllers.controller("LeagueTblCtrl", ["$scope",
-  function($scope){
-
-}]);
-
 
 soccerDashControllers.controller('IndexController',
   ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService', "$rootScope",
@@ -17,6 +11,8 @@ soccerDashControllers.controller('IndexController',
     //Firebase/Twitter Authentication
     $scope.loginObj = $firebaseSimpleLogin(dataRef);
 
+    $scope.showLoader = true; //Start the loader in every widget
+
     //Listening to login
     $scope.$on("$firebaseSimpleLogin:login", function(evt, user) {
 
@@ -26,6 +22,7 @@ soccerDashControllers.controller('IndexController',
       statsfcService.getLeague('premier-league','2013/2014')
       .then(function(data) {
         $scope.teams = data;
+        $scope.showLoader = false; //Stop the loader in every widget
       });
 
       //Add current user to the scope
@@ -47,19 +44,14 @@ soccerDashControllers.controller('IndexController',
           //If it is an existing user, get the fav team, set the curr team, get the fav team results and redirect him to '/'
         } else {  
           console.log('The user does already exists:' + user['id']);
-          console.log('snapshot', snapshot);
           //The favorite team is based on Firebase snapshop data and inserted in the $scope.user object
-          console.log('snapshot.val().favoriteTeam', snapshot.val().favoriteTeam);
           $scope.user.favoriteTeam = snapshot.val().favoriteTeam;
-          console.log('favteam', $scope.user.favoriteTeam.team)
           //The newFavoriteTeam is the variable used when selecting a team in the list
           $scope.newFavoriteTeam = $scope.user.favoriteTeam;
           //Set the current team as the favorite team
           $scope.currentTeam = snapshot.val().favoriteTeam;
-          console.log('$scope.currentTeam.teamshort', $scope.currentTeam.teamshort);
 
           // $scope.position = $scope.currentTeam.position;
-          // console.log('yes 3')
           changeOrdinal($scope);
 
           $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
@@ -156,6 +148,11 @@ soccerDashControllers.controller("MiniLeagueCtrl",
 
 }]);
 
+soccerDashControllers.controller("LeagueTblCtrl", ["$scope",
+  function($scope){
+
+}]);
+
 // Recent Results (small) Controller
 soccerDashControllers.controller("RecentResult", ["$scope", "statsfcService",
   function($scope, statsfcService) {
@@ -196,9 +193,8 @@ soccerDashControllers.controller("RecentResult", ["$scope", "statsfcService",
 soccerDashControllers.controller("TeamResultsController", ["$scope", "statsfcService",
   function($scope, statsfcService) {
 
-  var teamName = $scope.currentTeam.teampath;
-
-  statsfcService.getTeamResults(teamName)
+  $scope.showTeamResults = false;
+  statsfcService.getTeamResults($scope.currentTeam.teampath)
   .then(function(data) {
     $scope.resultData = [];  
 
@@ -226,13 +222,16 @@ soccerDashControllers.controller("TeamResultsController", ["$scope", "statsfcSer
       data[i]['incidents'] = []; // delete the existing incidents array and replace with newly formed arrays
       data[i]['incidents'].push(homeIncidents);
       data[i]['incidents'].push(awayIncidents);
-    }      
+    }
+    $scope.showTeamResults = true;
+
   });
 }]);
 
 // Full League Results controller
 soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$scope", "statsfcService", function($rootScope, $scope, statsfcService) {
 
+  $scope.showLeagueResults = false;
   statsfcService.getLeagueResults()
   .then(function(data) {
     $scope.resultsData = [];  
@@ -266,6 +265,7 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
         matchDateArray.push($scope.resultsData[i]);
       }
     }
+    $scope.showLeagueResults = true;
   });
 
 }]);
@@ -276,21 +276,24 @@ soccerDashControllers.controller('TeamSttsCtrl', function($scope) {
 });
 
 //Modal controller
-soccerDashControllers.controller('ModalCtrl', function($scope) {
+soccerDashControllers.controller('ModalCtrl', ['$scope',
+  function($scope) {
+
   $scope.modalShown= false;
   $scope.toggleModal = function(){
     $scope.modalShown = !$scope.modalShown;
   };
-});
+
+}]);
 
 // Team Top Scorers Controller
-soccerDashControllers.controller("TeamTopScorersController", ["$scope", "statsfcService",
+soccerDashControllers.controller('TeamTopScorersController', ['$scope', 'statsfcService',
   function($scope, statsfcService) {
 
   $scope.$watch('currentTeam', function(newVal, oldVal, scope) {
     if(newVal) {
       $scope.showGoal = false;
-        
+
       statsfcService.getTeamTopScorers(newVal.teampath)
       .then(function(data) {
         $scope.goalData = [];
@@ -303,10 +306,6 @@ soccerDashControllers.controller("TeamTopScorersController", ["$scope", "statsfc
   });
 
 }]);
-
-soccerDashControllers.controller('ExpandedCtrl', function($scope){
-
-});
 
 var changeOrdinal = function(scope){
   if (typeof scope.currentTeam.position ===  'number'){

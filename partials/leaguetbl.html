@@ -19,8 +19,6 @@
   				</tr>
   			</thead>
   			<tbody>
-<!--   				<tr ng-repeat="team in league" class="league-content" ng-class="{'favorite': team.favorite }">
- -->
           <tr ng-repeat="team in teams" class="league-content" 
               ng-class="{newFavoriteTeam: team.teampath === user.favoriteTeam.teampath }">
   				<td> {{team.position}} </td>
