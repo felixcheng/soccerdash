@@ -22,6 +22,7 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
       statsfcService.getLeague('premier-league','2013/2014')
       .then(function(data) {
         $scope.teams = data;
+        changeOrdinal($scope);
         $scope.showLoader = false; //Stop the loader in every widget
       });
 
@@ -107,18 +108,8 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
     //Select another current team
     $scope.selectCurrentTeam = function(team) {
       $scope.currentTeam = team;
-
+      console.log('new', $scope.currentTeam.position )
       changeOrdinal($scope);
-
-      if ($scope.currentTeam.position == 1){
-        $scope.currentTeam.position = $scope.currentTeam.position + "st"
-      } else if ($scope.currentTeam.position == 2){
-        $scope.currentTeam.position = $scope.currentTeam.position + "nd"
-      } else if ($scope.currentTeam.position == 3){
-        $scope.currentTeam.position = $scope.currentTeam.position + "rd"
-      } else {
-        $scope.currentTeam.position = $scope.currentTeam.position + "th"       
-      }
     };
 
 }]);

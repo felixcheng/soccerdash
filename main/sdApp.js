@@ -23,7 +23,7 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
     controller: "ProfileController"
   })
   .when('/league', {
-    templateUrl: '../partials/leaguetbl.html',
+    templateUrl: '../leaguetable/leaguetbl.html',
     controller: 'LeagueTblCtrl'
   })
   .when('/teamresults', {
@@ -31,8 +31,7 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
     controller: 'TeamResultsController'
   })
   .when('/teamstatus', {
-    templateUrl: '../partials/teamstatus.html',
-    controller: 'TeamSttsCtrl'
+    templateUrl: '../PositionChart/teamstatus.html',
   })
   .when('/modal', {
     templateUrl: '../partials/modal.html',

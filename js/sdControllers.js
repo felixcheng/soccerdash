@@ -305,16 +305,16 @@ soccerDashControllers.controller('TeamTopScorersController', ['$scope', 'statsfc
 }]);
 
 var changeOrdinal = function(scope){
-
   if (typeof scope.currentTeam.position ===  'number'){
     if (scope.currentTeam.position == 1){
-      scope.currentTeam.position = scope.currentTeam.position + "st";
+      scope.currentTeam.positionOr = scope.currentTeam.position + "st";
     } else if (scope.currentTeam.position == 2){
-      scope.currentTeam.position = scope.currentTeam.position + "nd";
+      scope.currentTeam.positionOr = scope.currentTeam.position + "nd";
     } else if (scope.currentTeam.position == 3){
-      scope.currentTeam.position = scope.currentTeam.position + "rd";
+      scope.currentTeam.positionOr = scope.currentTeam.position + "rd";
     } else {
-      scope.currentTeam.position = scope.currentTeam.position + "th";      
+      scope.currentTeam.positionOr = scope.currentTeam.position + "th";      
     }      
   }
+  console.log('ord', scope.currentTeam.positionOr )
 }
