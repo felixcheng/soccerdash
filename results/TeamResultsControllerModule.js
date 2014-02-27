@@ -16,7 +16,7 @@ angular.module('teamResultsControllerModule', ['soccerDashServices'])
     }
 
     for(var i = 0; i < $scope.resultData.length; i++){
-      $scope.resultData[i].dateiso = statsfcService.formatDate($scope.resultData[i].dateiso); // change dates using helper function
+      $scope.resultData[i].dateiso = formatDate($scope.resultData[i].dateiso); // change dates using helper function
     }
 
     // re-create the match incidents to be split by home / away team

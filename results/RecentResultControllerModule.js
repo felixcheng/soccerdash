@@ -11,7 +11,7 @@ angular.module('recentResultControllerModule', ['soccerDashServices'])
       .then(function(data) {
         $scope.resultData = data;
 
-        $scope.date = statsfcService.formatDate(data[0].dateiso);
+        $scope.date = formatDate(data[0].dateiso);
         
         $scope.homeTeam = data[0].home; 
         $scope.awayTeam = data[0].away; 
