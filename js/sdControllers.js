@@ -272,10 +272,6 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
 }]);
 
 
-soccerDashControllers.controller('TeamSttsCtrl', function($scope) {
-
-});
-
 //Modal controller
 soccerDashControllers.controller('ModalCtrl', ['$scope',
   function($scope) {
