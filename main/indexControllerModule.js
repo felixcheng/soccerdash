@@ -1,7 +1,7 @@
 angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAnimate'])
 
 .controller('IndexController',
-  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService', "$rootScope",
+  ['$scope', '$location', '$firebaseSimpleLogin', '$firebase', 'statsfcService',
     function($scope, $location, $firebaseSimpleLogin, $firebase, statsfcService) {
 
     //Get Firebase members data collection and store it in scope

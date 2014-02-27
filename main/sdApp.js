@@ -1,6 +1,6 @@
 //Main app
 var soccerDashApp = angular.module('soccerDashApp', 
-  ['ngRoute', 'ngResource', 'soccerDashControllers', 'soccerDashServices', 'firebase']);
+  ['ngRoute', 'ngResource', 'soccerDashControllers', 'soccerDashServices', 'firebase', 'indexControllerModule']);
 
 //Routes configuration
 soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
