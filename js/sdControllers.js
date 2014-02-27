@@ -123,6 +123,7 @@ var soccerDashControllers = angular.module('soccerDashControllers', ['soccerDash
 
 // }]);
 
+
 soccerDashControllers.controller('HomeController',
   ['$scope', function($scope){
 
@@ -271,10 +272,6 @@ soccerDashControllers.controller("LeagueResultsController", ["$rootScope", "$sco
 }]);
 
 
-soccerDashControllers.controller('TeamSttsCtrl', function($scope) {
-
-});
-
 //Modal controller
 soccerDashControllers.controller('ModalCtrl', ['$scope',
   function($scope) {
@@ -308,6 +305,7 @@ soccerDashControllers.controller('TeamTopScorersController', ['$scope', 'statsfc
 }]);
 
 var changeOrdinal = function(scope){
+
   if (typeof scope.currentTeam.position ===  'number'){
     if (scope.currentTeam.position == 1){
       scope.currentTeam.position = scope.currentTeam.position + "st";
