@@ -19,7 +19,8 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
       console.log("User " + user.id + " successfully logged in!");
 
       //Load the teams detailed data when user has logged in
-      statsfcService.getLeague('premier-league','2013/2014')
+      // statsfcService.getLeague('premier-league','2013/2014')
+      statsfcService.fetchData('table')
       .then(function(data) {
         $scope.teams = data;
         changeOrdinal($scope);
