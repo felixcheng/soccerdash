@@ -37,7 +37,7 @@ soccerDashServices.service('statsfcService',
         if (cachedResults && (now - lastCachedAt <= 60 * 60 * 12)) {
           d.resolve(cachedResults);
         } else {
-          $http.jsonp(url)
+          $http.jsonp(urlString)
           .success(function(data, status, headers) {
             var result = {data: data, cached: false};
             cachedResults = {data: data, cached: true};
