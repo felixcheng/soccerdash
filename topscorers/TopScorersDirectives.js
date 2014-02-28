@@ -24,4 +24,4 @@ soccerDashApp.directive('ngTopScorers', function($parse) {
     } 
   };
   return directiveDefinitionObject;
-})
+});
