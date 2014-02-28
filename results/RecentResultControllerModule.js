@@ -31,8 +31,5 @@ angular.module('recentResultControllerModule', ['soccerDashServices'])
         }
       });
     }
-
   });
-
-
 }]);
