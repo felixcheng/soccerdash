@@ -23,7 +23,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
       .then(function(data) {
         $scope.teams = data;
         changeOrdinal($scope);
-        $scope.showLoader = false; //Stop the loader in every widget
       });
 
       //Add current user to the scope
@@ -41,7 +40,9 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
           $scope.members[user['id']] = user;
           $scope.members.$save(user['id']);
           //When a user is new, redirect him to the '/select''
+          $scope.showLoader = false; //Stop the loader in every widget
           $location.path("/select");
+
           //If it is an existing user, get the fav team, set the curr team, get the fav team results and redirect him to '/'
         } else {  
           console.log('The user does already exists:' + user['id']);
@@ -51,6 +52,7 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
           $scope.newFavoriteTeam = $scope.user.favoriteTeam;
           //Set the current team as the favorite team
           $scope.currentTeam = snapshot.val().favoriteTeam;
+          $scope.showLoader = false; //Stop the loader in every widget
 
           // $scope.position = $scope.currentTeam.position;
           changeOrdinal($scope);
