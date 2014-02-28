@@ -48,12 +48,13 @@ soccerDashServices.service('statsfcService',
         if(path === 'top-scorers') {
           var url = domain + path + '.json?key=' + apiKey + competition + '&team=' 
           + arguments[1] + year + jsonCb;
+          console.log('url in fetchData:', url);
         }
         if(path === 'results' && arguments.length === 0) {
           var url = domain + path + '.json?key=' + apiKey + competition + year + jsonCb;  
-        }else if(arguments.length === 1) {
+        }else if(arguments.length === 2) {
           var url = domain + path + '.json?key=' + apiKey + competition + '&team='
-          + arguments[1] + '&limit=5' + jsonCb;   
+          + arguments[1] + '&limit=5' + jsonCb; 
         }else {
           var url = domain + path + '.json?key=' + apiKey + competition + '&team='
           + arguments[1] + '&from=' + arguments[2] + jsonCb;
