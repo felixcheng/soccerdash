@@ -1,3 +1,4 @@
+//Convert number to ordinal number
 var changeOrdinal = function(scope){
   if (typeof scope.currentTeam.position ===  'number'){
     if (scope.currentTeam.position == 1){
