@@ -29,3 +29,29 @@ var formatDate = function(isoString) {
                   
   return days[date.getDay()] + " " + convertNum(date.getDate()) + " " + months[date.getMonth()]; 
 };
+
+var getLeagueUrl = function(competition, year) {
+  return urlString = 'https://api.statsfc.com/table.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k'+
+    '&competition='+ competition + '&year=' + year + '&callback=JSON_CALLBACK';        
+};
+
+var getResultUrl = function(teamName) {
+  return urlString = 'https://api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k' 
+    + '&competition=premier-league&team=' + teamName + '&limit=5&callback=JSON_CALLBACK';
+};
+
+var getTeamResultsUrl = function(teamName) {
+  return urlString = 'https://api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k' 
+  + '&competition=premier-league&team=' + teamName + '&year=2013/2014&callback=JSON_CALLBACK';
+};
+
+var getTeamTopScorersUrl = function(teamName) {
+  return urlString = 'https://api.statsfc.com/top-scorers.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k' 
+    + '&competition=premier-league&team=' + teamName + '&year=2013/2014&callback=JSON_CALLBACK';
+};
+
+var getLeagueResultsUrl = function() {
+  return urlString = 'https://api.statsfc.com/results.json?key=SBCwkOLa9b8lmePuTjFIoFmFkdo9cvtAPrhxlA6k' 
+    + '&competition=premier-league&from=2013-08-16&callback=JSON_CALLBACK';
+};
+

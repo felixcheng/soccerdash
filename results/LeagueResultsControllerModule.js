@@ -5,7 +5,7 @@ angular.module('leagueResultsControllerModule', ['soccerDashServices'])
     function($scope, statsfcService) {
 
   $scope.showLeagueResults = false;
-  statsfcService.getLeagueResults()
+  statsfcService.fetchLeagueResultsData(getLeagueResultsUrl())
   .then(function(result) {
     console.log('result', result);
     var data = result.data;
