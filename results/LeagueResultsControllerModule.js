@@ -6,17 +6,20 @@ angular.module('leagueResultsControllerModule', ['soccerDashServices'])
 
   $scope.showLeagueResults = false;
   statsfcService.getLeagueResults()
-  .then(function(data) {
+  .then(function(result) {
+    console.log('result', result);
+    var data = result.data;
+    var cached = result.cached;
+
     $scope.resultsData = [];  
 
     for(var i = 0; i < data.length; i++) {
       if(data[i]['status'] === 'Finished') {
+        if(!cached) {
+          data[i].dateiso = formatDate(data[i].dateiso); // change dates using helper function
+        }
         $scope.resultsData.push(data[i]);     
       }
-    }
-
-    for(var i = 0; i < $scope.resultsData.length; i++) {
-      $scope.resultsData[i].dateiso = formatDate($scope.resultsData[i].dateiso); // change dates using helper function
     }
 
     $scope.allResults = [];
@@ -39,7 +42,7 @@ angular.module('leagueResultsControllerModule', ['soccerDashServices'])
       }
     }
     $scope.showLeagueResults = true;
-  });
 
+  });
 
 }]);
