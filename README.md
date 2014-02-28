@@ -4,7 +4,8 @@
 
 SoccerDash is a simple dashboard app to show stats for your favourite English Premier League football (soccer) club.
 
-Users can select their favourite team after logging in with Twitter and will be presented with a dashboard of stats. Teams can be changed   
+Users can select their favourite team after logging in with Twitter and will be presented with a dashboard of stats. Hovering on the username will open the team menu and a new team can be selected. The position chart will update and overlay a comparision between the newly selected team and the favourite team.
+The favourite team can be changed by selecting My Profile from the main menu.    
 
 ##Link to Deployed Version
 
