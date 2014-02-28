@@ -16,8 +16,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
     //Listening to login
     $scope.$on("$firebaseSimpleLogin:login", function(evt, user) {
 
-      console.log("User " + user.id + " successfully logged in!");
-
       //Load the teams detailed data when user has logged in
       statsfcService.getLeague('premier-league','2013/2014')
       .then(function(data) {
@@ -34,7 +32,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
       userRef.once('value', function(snapshot) {
         //If it is a new user, create a firebase member and set its new attribute to true
         if(snapshot.val() === null) {
-          console.log('User ' + user['id'] + ' does not exist.');
           //Create a new member
           $scope.members[user['id']] = user;
           $scope.members.$save(user['id']);
@@ -44,7 +41,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
 
           //If it is an existing user, get the fav team, set the curr team, get the fav team results and redirect him to '/'
         } else {  
-          console.log('The user does already exists:' + user['id']);
           //The favorite team is based on Firebase snapshop data and inserted in the $scope.user object
           $scope.user.favoriteTeam = snapshot.val().favoriteTeam;
           //The newFavoriteTeam is the variable used when selecting a team in the list
@@ -68,7 +64,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
 
     //Listening to logout
     $scope.$on("$firebaseSimpleLogin:logout", function(evt) {
-      console.log("User logged out!");
       $location.path("/login"); //When a user is logged out, redirect him to '/login'
     });
 
@@ -90,7 +85,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
     };
 
     $scope.selectNewFavoriteTeam = function(team) {
-      console.log('team selected!', team);
       $scope.newFavoriteTeam = team;
     };
 
@@ -107,7 +101,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
     //Select another current team
     $scope.selectCurrentTeam = function(team) {
       $scope.currentTeam = team;
-      console.log('new', $scope.currentTeam.position )
       changeOrdinal($scope);
     };
 
