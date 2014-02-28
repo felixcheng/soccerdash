@@ -7,7 +7,8 @@ angular.module('recentResultControllerModule', ['soccerDashServices'])
   $scope.$watch('currentTeam', function(newVal, oldVal, scope) {
 
     if(newVal) {
-      statsfcService.getResult(newVal.teampath)
+      // statsfcService.getResult(newVal.teampath)
+      statsfcService.fetchData('results', newVal.teampath)
       .then(function(data) {
         $scope.resultData = data;
 
@@ -31,8 +32,5 @@ angular.module('recentResultControllerModule', ['soccerDashServices'])
         }
       });
     }
-
   });
-
-
 }]);
