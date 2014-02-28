@@ -1,7 +1,8 @@
 var soccerDashServices = angular.module('soccerDashServices', ['ngResource']);
 
-var cachedResults;
-var lastCachedAt;
+soccerDashServices.cache = {};
+soccerDashServices.cache.cachedResults;
+soccerDashServices.cache.lastCachedAt;
 
 soccerDashServices.service('statsfcService', 
  ['$http', '$q',
@@ -33,15 +34,15 @@ soccerDashServices.service('statsfcService',
         var d = $q.defer();
         var now = new Date();
 
-        //If request done in 12 hours timeframe, provide cached data
-        if (cachedResults && (now - lastCachedAt <= 60 * 60 * 12)) {
-          d.resolve(cachedResults);
+        //If request done in 1 hours timeframe, provide cached data
+        if (soccerDashServices.cache.cachedResults && (now - soccerDashServices.cache.lastCachedAt <= 1000 * 60 * 60)) {
+          d.resolve(soccerDashServices.cache.cachedResults);
         } else {
           $http.jsonp(urlString)
           .success(function(data, status, headers) {
             var result = {data: data, cached: false};
-            cachedResults = {data: data, cached: true};
-            lastCachedAt = new Date();
+            soccerDashServices.cache.cachedResults = {data: data, cached: true};
+            soccerDashServices.cache.lastCachedAt = new Date();
             d.resolve(result);
           })
           .error(function(data, status, headers) {
