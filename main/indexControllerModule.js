@@ -33,7 +33,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
       //Listen to the 'value' event only once, the event is triggered when async data is received from Firebase
       userRef.once('value', function(snapshot) {
         //If it is a new user, create a firebase member and set its new attribute to true
-        //The new attribute will be used to decide if the 'Select a fav team' pop up must be displayed
         if(snapshot.val() === null) {
           console.log('User ' + user['id'] + ' does not exist.');
           //Create a new member
@@ -54,7 +53,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
           $scope.currentTeam = snapshot.val().favoriteTeam;
           $scope.showLoader = false; //Stop the loader in every widget
 
-          // $scope.position = $scope.currentTeam.position;
           changeOrdinal($scope);
 
           $scope.favPo = TeamPo[$scope.user.favoriteTeam.team];
@@ -64,7 +62,6 @@ angular.module('indexControllerModule', ['soccerDashServices', 'firebase', 'ngAn
           $location.path("/");
           $scope.show = true;
         }
-        //$scope.$broadcast('loaded', $scope.currentTeam)
       });
 
     });
