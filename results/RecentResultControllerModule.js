@@ -7,7 +7,7 @@ angular.module('recentResultControllerModule', ['soccerDashServices'])
   $scope.$watch('currentTeam', function(newVal, oldVal, scope) {
 
     if(newVal) {
-      statsfcService.getResult(newVal.teampath)
+      statsfcService.fetchData(getResultUrl(newVal.teampath))
       .then(function(data) {
         $scope.resultData = data;
 
