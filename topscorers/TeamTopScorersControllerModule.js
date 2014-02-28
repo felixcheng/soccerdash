@@ -8,8 +8,7 @@ angular.module('teamTopScorersControllerModule', ['soccerDashServices'])
     if(newVal) {
       $scope.showGoal = false;
 
-      // statsfcService.getTeamTopScorers(newVal.teampath)
-      statsfcService.fetchData('top-scorers', newVal.teampath)
+      statsfcService.getTeamTopScorers(newVal.teampath)
       .then(function(data) {
         $scope.goalData = [];
         for(var i = 0; i < 8; i++) { 
