@@ -7,7 +7,6 @@ angular.module('leagueResultsControllerModule', ['soccerDashServices'])
   $scope.showLeagueResults = false;
   statsfcService.fetchLeagueResultsData(getLeagueResultsUrl())
   .then(function(result) {
-    console.log('result', result);
     var data = result.data;
     var cached = result.cached;
 
