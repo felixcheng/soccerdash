@@ -39,5 +39,5 @@ soccerDashApp.config(['$routeProvider', '$locationProvider', function($routeProv
     controller: 'LeagueResultsController'
   })
 
-  .otherwise({redirect_to: '/login'})
+  .otherwise({redirect_to: '/main/home.html'})
 }]);
