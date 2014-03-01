@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="soccerDashApp">
 <head>
+  <script src="lib/jquery/jquery-1.10.2.js"></script>
   <title>SoccerDash</title>  
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/styles.css">
@@ -14,8 +15,10 @@
 
   <!-- d3 Resourses --> 
   <script src="lib/d3.v3/d3.v3.min.js" charset="utf-8"></script>
+  <!-- I added this library in the lib folder to avoid complaints about not being https --> 
+  <script src="lib/dimplejs/dimple.v1.1.5.js"></script>
   <!-- jQuery Resources -->
-  <script src="lib/jquery/jquery-1.10.2.js"></script>  
+    
   <!-- Angular Resources -->
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-route.js"></script>
@@ -27,13 +30,26 @@
   <script src='https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js'></script>
 
   <!-- Our JS files  -->
-  <script src="js/sdApp.js"></script>
-  <script src="js/sdControllers.js"></script>
-  <script src="js/sdServices.js"></script>
-  <script src="js/sdAnimations.js"></script>
+  <script src="main/app.js"></script>
+  <script src="main/services.js"></script>
+  <script src="main/IndexControllerModule.js"></script>
+  <script src="main/navAnimations.js"></script>
+  <script src="main/homeControllerModule.js"></script>
+
+  <script src="results/LeagueResultsControllerModule.js"></script>
+  <script src="results/RecentResultControllerModule.js"></script>
+  <script src="results/TeamResultsControllerModule.js"></script>
+
+  <script src="topscorers/TeamTopScorersControllerModule.js"></script>
+  <script src="topscorers/TopScorersDirectives.js"></script>
+
+  <script src="PositionChart/sdDrtPoChart.js"></script>
+  <script src="PositionChart/PlotChart.js"></script>
+
+  <script src="helpers/helperFunction.js"></script>
 
   <!-- Data files --> 
-  <script src="js/data.js"></script>
+  <script src="helpers/data.js"></script>
 
 </body>
 </html>
